@@ -1,7 +1,7 @@
 package com.k41d.cms.interfaces.rest;
 
 import com.k41d.cms.business.domain.user.User;
-import com.k41d.cms.business.infrastructure.security.JWTTokenUtils;
+import com.k41d.cms.infrastructure.security.JWTTokenUtils;
 import com.k41d.cms.business.service.UserService;
 import com.k41d.leyline.framework.interfaces.dto.TokenDTO;
 import com.k41d.cms.business.domain.user.UserDTO;
@@ -28,7 +28,7 @@ public class UserAPI extends LeylineReadonlyRestCRUD<UserService, User, UserDTO>
         if (login == null) {
             throw new LeylineException("Invalid login");
         }
-        User user = service.checkAndGet(login.getName(), login.getPassword());
+        User user = service.checkAndGet(login.getUsername(), login.getPassword());
 
         return new TokenDTO(JWTTokenUtils.sign(user));
     }

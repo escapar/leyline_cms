@@ -15,7 +15,7 @@ import org.joda.time.DateTime;
 
     private String mail;
 
-    private String name;
+    private String username;
 
     private String password;
 

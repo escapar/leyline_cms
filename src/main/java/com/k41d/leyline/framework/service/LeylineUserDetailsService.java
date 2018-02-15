@@ -27,7 +27,7 @@ public abstract class LeylineUserDetailsService<T extends LeylineUserRepo, D ext
     @Override
     public D loadUserByUsername(String username) throws
             UsernameNotFoundException {
-        D user = (D) userRepo.findByNameEquals(username);
+        D user = (D) userRepo.findByUsernameEquals(username);
         if (user == null) {
             throw new UsernameNotFoundException("Username " + username + " not found");
         }

@@ -1,4 +1,4 @@
-package com.k41d.cms.business.infrastructure.security;
+package com.k41d.cms.infrastructure.security;
 
 
 public enum ROLE_CONSTS {

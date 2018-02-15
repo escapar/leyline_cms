@@ -40,48 +40,46 @@ public class SpringFoxWebMvcConfig extends WebMvcConfigurerAdapter {
     }
 
 
-//    @Override
-//    public void addCorsMappings(CorsRegistry registry) {
-//        registry.addMapping("/**")
-//                .allowedOrigins("http://localhost:9999","http://localhost:3000","http://116.196.123.67:666","http://vs.def.science")
-//                .maxAge(450450450)
-//                .allowedMethods("PUT", "DELETE", "POST", "GET", "OPTIONS")
-//                //    .allowedHeaders()
-//                .allowedHeaders("Origin",
-//                        "Accept-Language",
-//                        "Accept-Encoding",
-//                        "X-Forwarded-For",
-//                        "Connection",
-//                        "Accept",
-//                        "User-Agent",
-//                        "Host",
-//                        "Referer",
-//                        "Cookie",
-//                        "Content-Type",
-//                        "Cache-Control",
-//                        "If-Modified-Since")
-//         .allowCredentials(true);
-//    }
-
-
-    @Bean
-    public CorsFilter corsFilter() {
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true); // you USUALLY want this
-        config.setAllowedOrigins(Arrays.asList("http://localhost:9999","http://localhost:3000","http://116.196.123.67:666","http://vs.def.science"));
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("OPTIONS");
-        config.addAllowedMethod("HEAD");
-        config.addAllowedMethod("GET");
-        config.addAllowedMethod("PUT");
-        config.addAllowedMethod("POST");
-        config.addAllowedMethod("DELETE");
-        config.addAllowedMethod("PATCH");
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:9999","http://localhost:9527","http://localhost:3000","http://k41d.com")
+                .allowedMethods("PUT", "DELETE", "POST", "GET", "OPTIONS")
+                .allowedHeaders("Origin",
+                        "Accept-Language",
+                        "Accept-Encoding",
+                        "X-Forwarded-For",
+                        "Connection",
+                        "Accept",
+                        "User-Agent",
+                        "Host",
+                        "Referer",
+                        "Cookie",
+                        "Content-Type",
+                        "Cache-Control",
+                        "If-Modified-Since")
+         .allowCredentials(true);
     }
+
+//
+//    @Bean
+//    public CorsFilter corsFilter() {
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowCredentials(true); // you USUALLY want this
+//        config.setAllowedOrigins(Arrays.asList("http://localhost:9999","http://localhost:9527","http://localhost:3000","http://k41d.com"));
+//        config.addAllowedHeader("*");
+//        config.addAllowedMethod("OPTIONS");
+//        config.addAllowedMethod("HEAD");
+//        config.addAllowedMethod("GET");
+//        config.addAllowedMethod("PUT");
+//        config.addAllowedMethod("POST");
+//        config.addAllowedMethod("DELETE");
+//        config.addAllowedMethod("PATCH");
+//        source.registerCorsConfiguration("/**", config);
+//        return new CorsFilter(source);
+//    }
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         for (HttpMessageConverter<?> converter : converters) {

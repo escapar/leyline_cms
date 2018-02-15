@@ -1,4 +1,4 @@
-package com.k41d.cms.business.infrastructure.security;
+package com.k41d.cms.infrastructure.security;
 
 import java.util.Arrays;
 import java.util.List;

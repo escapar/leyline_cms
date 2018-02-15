@@ -14,7 +14,7 @@ import com.k41d.leyline.framework.service.LeylineDomainService;
 import com.k41d.leyline.framework.service.LeylineUserDetailsService;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.k41d.cms.business.infrastructure.security.ROLE_CONSTS;
+import com.k41d.cms.infrastructure.security.ROLE_CONSTS;
 import com.k41d.leyline.framework.domain.LeylineDO;
 
 import org.jodah.typetools.TypeResolver;

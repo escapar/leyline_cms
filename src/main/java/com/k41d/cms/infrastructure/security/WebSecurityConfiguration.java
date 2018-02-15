@@ -1,4 +1,4 @@
-package com.k41d.cms.business.infrastructure.security;
+package com.k41d.cms.infrastructure.security;
 
 
 import com.k41d.cms.business.service.UserService;

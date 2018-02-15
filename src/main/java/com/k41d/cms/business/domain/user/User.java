@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.k41d.cms.business.infrastructure.security.ROLE_CONSTS;
+import com.k41d.cms.infrastructure.security.ROLE_CONSTS;
 
 import org.joda.time.DateTime;
 import org.springframework.data.annotation.Transient;
@@ -44,8 +44,8 @@ public class User implements Serializable,LeylineUser {
     @Column(name="mail")
     private String mail;
 
-    @Column(name="name")
-    private String name;
+    @Column(name="username")
+    private String username;
 
     @Column(name="password")
     private String password;
@@ -74,7 +74,7 @@ public class User implements Serializable,LeylineUser {
 
     @Override
     public Object getPrincipal() {
-        return name;
+        return username;
     }
 
     @Override
@@ -97,9 +97,8 @@ public class User implements Serializable,LeylineUser {
         return password;
     }
 
-    @Override
     public String getUsername() {
-        return name;
+        return username;
     }
 
     @Override
@@ -153,7 +152,7 @@ public class User implements Serializable,LeylineUser {
 
 
     @Override public String getName() {
-        return name;
+        return username;
     }
 
 

@@ -1,4 +1,4 @@
-package com.k41d.cms.business.infrastructure.utils;
+package com.k41d.cms.infrastructure.utils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

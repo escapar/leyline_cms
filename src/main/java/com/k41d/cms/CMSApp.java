@@ -34,7 +34,7 @@ import static com.google.common.collect.Lists.*;
 @EnableJpaRepositories(basePackages = {"com.k41d.cms.business.service","com.k41d.cms.business.domain"})
 @EnableSwagger2
 @ComponentScan(basePackages = {"com.k41d.cms" })
-@EntityScan(basePackages ={"com.k41d.cms.business"})
+@EntityScan(basePackages ={"com.k41d.cms.business","com.k41d.cms.infrastructure"})
 @EnableAspectJAutoProxy
 @EnableScheduling
 @EnableConfigurationProperties

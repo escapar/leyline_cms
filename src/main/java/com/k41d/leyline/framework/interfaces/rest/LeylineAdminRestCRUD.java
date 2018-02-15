@@ -8,7 +8,7 @@ import com.k41d.leyline.framework.interfaces.dto.assembler.DTOAssembler;
 import com.k41d.leyline.framework.interfaces.view.LeylineView;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.k41d.cms.business.infrastructure.security.ROLE_CONSTS;
+import com.k41d.cms.infrastructure.security.ROLE_CONSTS;
 import com.k41d.leyline.framework.domain.LeylineDO;
 import com.k41d.leyline.framework.domain.user.LeylineUser;
 import com.k41d.leyline.framework.infrastructure.common.exceptions.PersistenceException;
