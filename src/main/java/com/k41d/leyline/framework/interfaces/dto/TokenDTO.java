@@ -1,4 +1,4 @@
-package com.k41d.cms.interfaces.dto;
+package com.k41d.leyline.framework.interfaces.dto;
 
 import java.io.Serializable;
 

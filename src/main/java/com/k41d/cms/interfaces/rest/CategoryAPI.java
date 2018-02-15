@@ -2,7 +2,7 @@ package com.k41d.cms.interfaces.rest;
 
 import com.k41d.cms.business.domain.category.Category;
 import com.k41d.cms.business.service.CategoryService;
-import com.k41d.cms.interfaces.dto.CategoryDTO;
+import com.k41d.cms.business.domain.category.CategoryDTO;
 
 import com.k41d.leyline.framework.interfaces.rest.LeylineReadonlyRestCRUD;
 

@@ -2,7 +2,7 @@ package com.k41d.cms.interfaces.rest;
 
 import com.k41d.cms.business.domain.tag.Tag;
 import com.k41d.cms.business.service.TagService;
-import com.k41d.cms.interfaces.dto.TagDTO;
+import com.k41d.cms.business.domain.tag.TagDTO;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

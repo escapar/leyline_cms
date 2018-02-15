@@ -1,4 +1,4 @@
-package com.k41d.cms.interfaces.dto;
+package com.k41d.cms.business.domain.user;
 
 import lombok.Data;
 import com.k41d.leyline.framework.interfaces.dto.LeylineDTO;

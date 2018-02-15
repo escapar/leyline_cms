@@ -2,7 +2,7 @@ package com.k41d.cms.business.infrastructure.security;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.k41d.cms.interfaces.dto.RoleDTO;
+import com.k41d.leyline.framework.interfaces.dto.RoleDTO;
 
 import com.k41d.leyline.framework.domain.user.LeylineUser;
 

@@ -1,10 +1,13 @@
-package com.k41d.cms.interfaces.dto;
+package com.k41d.cms.business.domain.topic;
 
 import java.util.List;
 
 import org.joda.time.DateTime;
 
 import lombok.Data;
+
+import com.k41d.cms.business.domain.category.CategoryDTO;
+import com.k41d.cms.business.domain.comment.CommentDTO;
 import com.k41d.leyline.framework.interfaces.dto.LeylineDTO;
 
 @Data public class TopicDTO implements LeylineDTO {

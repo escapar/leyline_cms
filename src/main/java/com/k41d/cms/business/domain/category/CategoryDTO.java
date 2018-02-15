@@ -1,4 +1,4 @@
-package com.k41d.cms.interfaces.dto;
+package com.k41d.cms.business.domain.category;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;

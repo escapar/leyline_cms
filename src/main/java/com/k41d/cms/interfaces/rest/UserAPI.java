@@ -3,9 +3,8 @@ package com.k41d.cms.interfaces.rest;
 import com.k41d.cms.business.domain.user.User;
 import com.k41d.cms.business.infrastructure.security.JWTTokenUtils;
 import com.k41d.cms.business.service.UserService;
-import com.k41d.cms.interfaces.dto.RoleDTO;
-import com.k41d.cms.interfaces.dto.TokenDTO;
-import com.k41d.cms.interfaces.dto.UserDTO;
+import com.k41d.leyline.framework.interfaces.dto.TokenDTO;
+import com.k41d.cms.business.domain.user.UserDTO;
 
 import com.k41d.leyline.framework.infrastructure.common.exceptions.LeylineException;
 import com.k41d.leyline.framework.interfaces.rest.LeylineReadonlyRestCRUD;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "api/user/")
-public class WorkerAPI extends LeylineReadonlyRestCRUD<UserService, User, UserDTO> {
+public class UserAPI extends LeylineReadonlyRestCRUD<UserService, User, UserDTO> {
 
 
 
@@ -34,15 +33,7 @@ public class WorkerAPI extends LeylineReadonlyRestCRUD<UserService, User, UserDT
         return new TokenDTO(JWTTokenUtils.sign(user));
     }
 
-    @RequestMapping(value = "role", method = RequestMethod.GET)
-    public @ResponseBody RoleDTO role()
-            throws LeylineException {
 
-        if(getCurrentUser() == null){
-            return null;
-        }
-        return RoleDTO.fromWorker(getCurrentUser());
-    }
 
 
 }

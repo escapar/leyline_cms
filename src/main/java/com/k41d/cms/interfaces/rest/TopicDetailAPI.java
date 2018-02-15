@@ -2,7 +2,7 @@ package com.k41d.cms.interfaces.rest;
 
 import com.k41d.cms.business.domain.topic.TopicDetail;
 import com.k41d.cms.business.service.TopicDetailService;
-import com.k41d.cms.interfaces.dto.TopicDetailDTO;
+import com.k41d.cms.business.domain.topic.TopicDetailDTO;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
