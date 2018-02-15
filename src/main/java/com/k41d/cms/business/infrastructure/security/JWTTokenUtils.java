@@ -2,7 +2,6 @@ package com.k41d.cms.business.infrastructure.security;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.k41d.leyline.framework.interfaces.dto.RoleDTO;
 
 import com.k41d.leyline.framework.domain.user.LeylineUser;
 
@@ -43,7 +42,7 @@ public class JWTTokenUtils {
     public static String sign(final LeylineUser user) {
         return user == null ? null :
                 Jwts.builder().setSubject(user.getName())
-                        .claim("roles", RoleDTO.fromWorker(user))
+                        .claim("roles", RoleDTO.fromUser(user))
                         .claim("name", user.getName())
                         .claim("id", user.getId())
                         .setExpiration(new DateTime().plusWeeks(1).toDate())
