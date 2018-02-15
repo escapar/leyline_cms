@@ -1,7 +1,7 @@
 package com.k41d.cms.business.infrastructure.security;
 
-import com.vs.business.service.WorkerService;
 
+import com.k41d.cms.business.service.UserService;
 import com.k41d.leyline.framework.infrastructure.configurations.LeylineWebSecurityConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationEn
 @EnableWebSecurity
 
 
-public class WebSecurityConfiguration extends LeylineWebSecurityConfiguration<WorkerService> {
+public class WebSecurityConfiguration extends LeylineWebSecurityConfiguration<UserService> {
 
     public WebSecurityConfiguration() {
 

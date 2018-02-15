@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.k41d.cms.business.infrastructure.security.ROLE_CONSTS;
@@ -19,6 +22,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import com.k41d.leyline.framework.domain.user.LeylineUser;
 import com.k41d.leyline.framework.interfaces.view.LeylineView;
 
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name="user")
+@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable,LeylineUser {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -142,51 +151,11 @@ public class User implements Serializable,LeylineUser {
         return id;
     }
 
-    public User setId(final long id) {
-        this.id = id;
-        return this;
-    }
-
-    public DateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public User setCreatedAt(final DateTime createdAt) {
-        this.createdAt = createdAt;
-        return this;
-    }
-
-    public DateTime getBirthday() {
-        return birthday;
-    }
-
-    public User setBirthday(final DateTime birthday) {
-        this.birthday = birthday;
-        return this;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public User setMail(final String mail) {
-        this.mail = mail;
-        return this;
-    }
 
     @Override public String getName() {
         return name;
     }
 
-    public User setName(final String name) {
-        this.name = name;
-        return this;
-    }
-
-    public User setPassword(final String password) {
-        this.password = password;
-        return this;
-    }
 
     @Override public int getRole() {
         return role;

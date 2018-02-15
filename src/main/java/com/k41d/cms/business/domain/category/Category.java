@@ -14,6 +14,9 @@ import org.joda.time.DateTime;
 
 import com.k41d.leyline.framework.domain.LeylineDO;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name="category")
 @NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
@@ -27,4 +30,6 @@ public class Category implements Serializable,LeylineDO {
 
     @Column(name="created_at")
     private DateTime createdAt;
+
+
 }

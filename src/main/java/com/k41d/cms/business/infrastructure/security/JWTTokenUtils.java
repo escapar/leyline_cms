@@ -2,7 +2,6 @@ package com.k41d.cms.business.infrastructure.security;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.vs.business.domain.worker.Worker;
 import com.k41d.cms.interfaces.dto.RoleDTO;
 
 import com.k41d.leyline.framework.domain.user.LeylineUser;

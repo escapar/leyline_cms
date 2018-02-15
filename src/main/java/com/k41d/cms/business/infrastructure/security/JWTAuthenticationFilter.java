@@ -3,8 +3,8 @@ package com.k41d.cms.business.infrastructure.security;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import com.vs.business.domain.worker.Worker;
-import com.vs.business.service.WorkerService;
+import com.k41d.cms.business.domain.user.User;
+import com.k41d.cms.business.service.UserService;
 
 import com.k41d.leyline.framework.infrastructure.configurations.StatelessAuthenticationFilter;
 
@@ -19,17 +19,17 @@ import io.jsonwebtoken.Claims;
  */
 @Component("JWTAuthenticationFilter")
 public class JWTAuthenticationFilter extends StatelessAuthenticationFilter {
-    public WorkerService userService;
+    public UserService userService;
 
 
     @Autowired
-    public JWTAuthenticationFilter(WorkerService userService) {
+    public JWTAuthenticationFilter(UserService userService) {
         this.userService = userService;
     }
 
     @Override
     public Authentication getAuthentication(HttpServletRequest request) throws ServletException {
-        Worker user = null;
+        User user = null;
         try {
             Claims c = JWTTokenUtils.parse(request);
             user = userService.getByClaims(c);

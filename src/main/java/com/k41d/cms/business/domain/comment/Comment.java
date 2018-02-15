@@ -20,6 +20,9 @@ import org.joda.time.DateTime;
 
 import com.k41d.leyline.framework.domain.LeylineDO;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name="comment")
 @NamedQuery(name="Comment.findAll", query="SELECT c FROM Comment c")

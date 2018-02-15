@@ -22,6 +22,9 @@ import org.joda.time.DateTime;
 
 import com.k41d.leyline.framework.domain.LeylineDO;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name="topic")
 @NamedQuery(name="Topic.findAll", query="SELECT topic FROM Topic topic")

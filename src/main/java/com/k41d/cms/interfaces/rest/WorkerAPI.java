@@ -6,7 +6,6 @@ import com.k41d.cms.business.service.UserService;
 import com.k41d.cms.interfaces.dto.RoleDTO;
 import com.k41d.cms.interfaces.dto.TokenDTO;
 import com.k41d.cms.interfaces.dto.UserDTO;
-import com.vs.interfaces.dto.*;
 
 import com.k41d.leyline.framework.infrastructure.common.exceptions.LeylineException;
 import com.k41d.leyline.framework.interfaces.rest.LeylineReadonlyRestCRUD;

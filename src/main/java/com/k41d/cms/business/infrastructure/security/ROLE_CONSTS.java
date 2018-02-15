@@ -1,6 +1,5 @@
 package com.k41d.cms.business.infrastructure.security;
 
-import com.vs.business.domain.commons.InvoiceStatus;
 
 public enum ROLE_CONSTS {
     ROLE_ADMIN(99),

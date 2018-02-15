@@ -1,7 +1,7 @@
 package com.k41d.leyline.framework.service;
 
+import com.k41d.cms.business.domain.user.User;
 import com.querydsl.core.types.Predicate;
-import com.vs.business.domain.worker.Worker;
 import com.k41d.leyline.framework.domain.LeylineDO;
 import com.k41d.leyline.framework.domain.LeylineRepo;
 import com.k41d.leyline.framework.domain.user.LeylineUser;
@@ -200,7 +200,7 @@ public abstract class LeylineDomainService<T extends LeylineRepo, E extends Leyl
         return getCurrentUser() == null ? null : getCurrentUser().getUsername().equals(u.getName());
     }
 
-    public Boolean checkOwnerOf(Worker u) {
+    public Boolean checkOwnerOf(User u) {
         return getCurrentUser() != null && getCurrentUser().getUsername().equals(u.getUsername());
     }
 
