@@ -2,9 +2,9 @@ package com.k41d.cms.infrastructure.security;
 
 
 public enum ROLE_CONSTS {
-    ROLE_ADMIN(99),
-    ROLE_UNCHECKED_USER(0),
-    ROLE_USER(1);
+    ADMIN(99),
+    UNCHECKED_USER(0),
+    USER(1);
     public final int val;
 
     private ROLE_CONSTS(final int val) {
@@ -12,9 +12,9 @@ public enum ROLE_CONSTS {
     }
 
     public static String getState(final int is){
-        if(is == ROLE_CONSTS.ROLE_ADMIN.val) return "ROLE_ADMIN";
-        if(is == ROLE_CONSTS.ROLE_UNCHECKED_USER.val) return "ROLE_UNCHECKED_USER";
-        if(is == ROLE_CONSTS.ROLE_USER.val) return "ROLE_USER";
+        if(is == ROLE_CONSTS.ADMIN.val) return "ADMIN";
+        if(is == ROLE_CONSTS.UNCHECKED_USER.val) return "UNCHECKED_USER";
+        if(is == ROLE_CONSTS.USER.val) return "USER";
 
         return "";
     }

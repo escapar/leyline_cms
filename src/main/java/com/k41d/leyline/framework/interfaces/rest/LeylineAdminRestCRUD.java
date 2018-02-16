@@ -221,7 +221,7 @@ public abstract class LeylineAdminRestCRUD<T extends LeylineDomainService, O ext
     }
 
     public boolean isAdmin() {
-        return getCurrentUser() != null && getCurrentUser().getRole() == ROLE_CONSTS.ROLE_ADMIN.val;
+        return getCurrentUser() != null && getCurrentUser().getRole() == ROLE_CONSTS.ADMIN.val;
     }
 
     public void setDTOAssembler(DTOAssembler<O, D> dtoAssembler) {

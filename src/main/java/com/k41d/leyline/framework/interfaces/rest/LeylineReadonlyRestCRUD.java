@@ -110,7 +110,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
 
     @SuppressWarnings(value = "unchecked")
     @JsonView(LeylineView.LIST.class)
-    @RequestMapping(value = "/list/query", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public PageJSON<D> listWithQuery(
             Pageable p, @RequestParam MultiValueMap<String, String> parameters) throws PersistenceException, NoSuchMethodException {
         checkQuery(parameters);
@@ -218,7 +218,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     }
 
     public boolean isAdmin() {
-        return getCurrentUser() != null && getCurrentUser().getRole() == ROLE_CONSTS.ROLE_ADMIN.val;
+        return getCurrentUser() != null && getCurrentUser().getRole() == ROLE_CONSTS.ADMIN.val;
     }
 
     public void setDTOAssembler(DTOAssembler<O, D> dtoAssembler) {

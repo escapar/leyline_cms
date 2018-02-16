@@ -30,7 +30,7 @@ public class UserAPI extends LeylineReadonlyRestCRUD<UserService, User, UserDTO>
         }
         User user = service.checkAndGet(login.getUsername(), login.getPassword());
 
-        return new TokenDTO(JWTTokenUtils.sign(user));
+        return TokenDTO.fromUser(user);
     }
 
 

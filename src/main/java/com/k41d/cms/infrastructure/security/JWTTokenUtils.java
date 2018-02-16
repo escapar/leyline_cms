@@ -31,7 +31,7 @@ public class JWTTokenUtils {
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return null;
         }
-        return parse(authHeader.substring(7)); // The part after "JUICE "
+        return parse(authHeader.substring(7));
     }
 
     public static Claims parse(final String token) {

@@ -124,20 +124,20 @@ public class User implements Serializable,LeylineUser {
     public static Collection<? extends GrantedAuthority> getRole(User user) {
         Collection<? extends GrantedAuthority> authorities = null;
 
-        if(user.getRole() == ROLE_CONSTS.ROLE_ADMIN.val){
-            authorities = javaslang.collection.Stream.of("ROLE_ADMIN", "ROLE_USER")
+        if(user.getRole() == ROLE_CONSTS.ADMIN.val){
+            authorities = javaslang.collection.Stream.of("ADMIN", "USER")
                     .map(SimpleGrantedAuthority::new)
                     .toJavaList();
-        }else if(user.getRole() == ROLE_CONSTS.ROLE_USER.val){
-            authorities = javaslang.collection.Stream.of("ROLE_USER")
+        }else if(user.getRole() == ROLE_CONSTS.USER.val){
+            authorities = javaslang.collection.Stream.of("USER")
                     .map(SimpleGrantedAuthority::new)
                     .toJavaList();
-        }else if(user.getRole() == ROLE_CONSTS.ROLE_UNCHECKED_USER.val){
-            authorities = javaslang.collection.Stream.of("ROLE_UNCHECKED_USER")
+        }else if(user.getRole() == ROLE_CONSTS.UNCHECKED_USER.val){
+            authorities = javaslang.collection.Stream.of("UNCHECKED_USER")
                     .map(SimpleGrantedAuthority::new)
                     .toJavaList();
         }else {
-            authorities = javaslang.collection.Stream.of("ROLE_ANONYMOUS")
+            authorities = javaslang.collection.Stream.of("ANONYMOUS")
                     .map(SimpleGrantedAuthority::new)
                     .toJavaList();
         }
