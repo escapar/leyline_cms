@@ -1,7 +1,7 @@
 package com.k41d.cms.business.domain.tag;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,9 +15,13 @@ import javax.persistence.Table;
 import com.k41d.leyline.framework.domain.LeylineDO;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-@Data
-@Entity
+@Getter
+@Setter
+@Accessors(chain = true)@Entity
 @Table(name="tag")
 @NamedQuery(name="Tag.findAll", query="SELECT t FROM Tag t")
 public class Tag implements Serializable,LeylineDO {
@@ -29,6 +33,6 @@ public class Tag implements Serializable,LeylineDO {
     private String name;
 
     @Column(name="created_at")
-    private LocalDateTime createdAt;
+    private ZonedDateTime createdAt;
 
 }

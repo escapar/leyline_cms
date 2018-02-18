@@ -1,7 +1,7 @@
 package com.k41d.cms.business.domain.user;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -23,8 +23,13 @@ import com.k41d.leyline.framework.domain.user.LeylineUser;
 import com.k41d.leyline.framework.interfaces.view.LeylineView;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-@Data
+@Getter
+@Setter
+@Accessors(chain = true)
 @Entity
 @Table(name="user")
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
@@ -36,10 +41,10 @@ public class User implements Serializable,LeylineUser {
     private long id;
 
     @Column(name="created_at")
-    private LocalDateTime createdAt;
+    private ZonedDateTime createdAt;
 
     @Column(name="birthday")
-    private LocalDateTime birthday;
+    private ZonedDateTime birthday;
 
     @Column(name="mail")
     private String mail;
@@ -125,19 +130,19 @@ public class User implements Serializable,LeylineUser {
         Collection<? extends GrantedAuthority> authorities = null;
 
         if(user.getRole() == ROLE_CONSTS.ADMIN.val){
-            authorities = javaslang.collection.Stream.of("ADMIN", "USER")
+            authorities = javaslang.collection.Stream.of("ROLE_ADMIN", "ROLE_USER")
                     .map(SimpleGrantedAuthority::new)
                     .toJavaList();
         }else if(user.getRole() == ROLE_CONSTS.USER.val){
-            authorities = javaslang.collection.Stream.of("USER")
+            authorities = javaslang.collection.Stream.of("ROLE_USER")
                     .map(SimpleGrantedAuthority::new)
                     .toJavaList();
         }else if(user.getRole() == ROLE_CONSTS.UNCHECKED_USER.val){
-            authorities = javaslang.collection.Stream.of("UNCHECKED_USER")
+            authorities = javaslang.collection.Stream.of("ROLE_UNCHECKED_USER")
                     .map(SimpleGrantedAuthority::new)
                     .toJavaList();
         }else {
-            authorities = javaslang.collection.Stream.of("ANONYMOUS")
+            authorities = javaslang.collection.Stream.of("ROLE_ANONYMOUS")
                     .map(SimpleGrantedAuthority::new)
                     .toJavaList();
         }

@@ -3,6 +3,7 @@ package com.k41d.leyline.framework.interfaces.rest;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.k41d.cms.business.domain.category.Category;
 import com.k41d.leyline.framework.interfaces.dto.assembler.DTOAssembler;
 import com.k41d.leyline.framework.interfaces.view.LeylineView;
 import com.querydsl.core.types.Predicate;
@@ -139,7 +140,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
         return dtoAssembler.buildDTO((O) service.findOne(p).orElse(null));
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
 
     @RequestMapping(value = "/batch", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
@@ -150,7 +151,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
         service.save(doList);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     @ResponseBody
@@ -158,10 +159,10 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     public void updateOne(@RequestBody D obj) throws IOException, PersistenceException {
         O objDO = dtoAssembler.buildDO(obj);
         checkUpdate(objDO);
-        service.save(dtoAssembler.buildDO(obj));
+        service.save(objDO);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
 
     @RequestMapping(value = "/batch", method = RequestMethod.PUT, produces = "application/json")
     @ResponseBody
@@ -170,7 +171,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
         update(json);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
 
     @RequestMapping(value = "", method = RequestMethod.PUT, produces = "application/json")
     @ResponseBody
@@ -183,7 +184,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
         return mm.map(service.save(objDO), typeDTO);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
     @ResponseBody
@@ -193,7 +194,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
         service.delete(id);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
 
     @RequestMapping(value = "", method = RequestMethod.DELETE, produces = "application/json")
     @ResponseBody
@@ -203,7 +204,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
         service.delete(id);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
 
     @RequestMapping(value = "/batch", method = RequestMethod.DELETE, produces = "application/json")
     @ResponseBody

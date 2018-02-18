@@ -67,7 +67,7 @@ public abstract class LeylineDomainService<T extends LeylineRepo, E extends Leyl
     @SuppressWarnings(value = "unchecked")
     public List<E> save(Collection<E> entities) throws PersistenceException {
         try {
-            return (List<E>) repo.save(entities);
+            return (List<E>) repo.saveAll(entities);
         } catch (Exception e) {
             e.printStackTrace();
             throw new PersistenceException(e.getMessage());
@@ -77,7 +77,7 @@ public abstract class LeylineDomainService<T extends LeylineRepo, E extends Leyl
     @SuppressWarnings(value = "unchecked")
     public boolean delete(Collection<E> entities) throws PersistenceException {
         try {
-            repo.delete(entities);
+            repo.deleteAll(entities);
         } catch (Exception e) {
             e.printStackTrace();
             throw new PersistenceException(e.getMessage());

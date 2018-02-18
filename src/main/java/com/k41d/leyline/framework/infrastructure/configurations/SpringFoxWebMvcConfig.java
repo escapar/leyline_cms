@@ -71,6 +71,8 @@ public class SpringFoxWebMvcConfig implements WebMvcConfigurer {
         config.setAllowCredentials(true); // you USUALLY want this
         config.setAllowedOrigins(Arrays.asList("http://localhost:9999","http://localhost:9527","http://localhost:3000","http://k41d.com"));
         config.addAllowedHeader("*");
+        config.addAllowedHeader("X-Authorization");
+
         config.addAllowedMethod("OPTIONS");
         config.addAllowedMethod("HEAD");
         config.addAllowedMethod("GET");

@@ -1,7 +1,7 @@
 package com.k41d.cms.business.domain.category;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.LocalTime;
 
 import javax.persistence.Column;
@@ -29,7 +29,7 @@ import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
+@Accessors(chain = true)
 @Entity
 @Table(name="category")
 @NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
@@ -45,14 +45,15 @@ public class Category implements Serializable,LeylineDO {
     private String alias;
 
     @Column(name="created_at")
-    private LocalDateTime createdAt;
+    private ZonedDateTime createdAt;
 
-//    @Enumerated(EnumType.STRING)
-//    @Column(name="type")
-//    private CategoryType type;
+    @Enumerated(EnumType.STRING)
+    @Column(name="type")
+    private CategoryType type;
 
     @Column(name="reference")
     private String reference; // topicId IF CatType SINGLE_STATIC_TOPIC , URL IF CatType SINGLE_STATIC_TOPIC.
+
 
 
 }

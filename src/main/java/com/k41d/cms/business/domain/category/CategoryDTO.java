@@ -1,35 +1,43 @@
 package com.k41d.cms.business.domain.category;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import javax.persistence.Column;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import com.k41d.cms.business.domain.commons.CategoryType;
 import com.k41d.cms.business.domain.topic.Topic;
+import com.k41d.cms.interfaces.view.CMSView;
 import com.k41d.leyline.framework.interfaces.dto.LeylineDTO;
 import com.k41d.leyline.framework.interfaces.view.LeylineView;
 
+@Getter
+@Setter
+@Accessors(chain = true)
+public class CategoryDTO implements LeylineDTO {
 
-@Data public class CategoryDTO implements LeylineDTO {
-
-    @JsonView(LeylineView.LIST.class)
+    @JsonView(CMSView.LIST.class)
     private long id;
 
-    @JsonView(LeylineView.LIST.class)
+    @JsonView(CMSView.LIST.class)
     private String name;
 
-    @JsonView(LeylineView.LIST.class)
+    @JsonView(CMSView.LIST.class)
     private String alias;
 
-    @JsonView(LeylineView.LIST.class)
-    private LocalDateTime createdAt;
+    @JsonView(CMSView.LIST.class)
+    private ZonedDateTime createdAt;
 
-    @JsonView(LeylineView.LIST.class)
+    @JsonView(CMSView.LIST.class)
     private CategoryType type;
 
-    @JsonView(LeylineView.LIST.class)
+    @JsonView(CMSView.LIST.class)
     private String reference;
+
+
 }

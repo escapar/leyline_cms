@@ -1,7 +1,7 @@
 package com.k41d.cms.business.domain.topic;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -32,7 +32,7 @@ import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
+@Accessors(chain = true)
 @Entity
 @Table(name="topic")
 @NamedQuery(name="Topic.findAll", query="SELECT topic FROM Topic topic")
@@ -45,7 +45,7 @@ public class Topic implements Serializable,LeylineDO {
     private String name;
 
     @Column(name="created_at")
-    private LocalDateTime createdAt;
+    private ZonedDateTime createdAt;
 
     @Column(name="featured")
     private boolean featured;

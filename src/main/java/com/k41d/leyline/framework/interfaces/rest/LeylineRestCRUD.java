@@ -153,7 +153,7 @@ public abstract class LeylineRestCRUD<T extends LeylineDomainService, O extends 
     public void updateOne(@RequestBody D obj) throws IOException, PersistenceException {
         O objDO = dtoAssembler.buildDO(obj);
         checkUpdate(objDO);
-        service.save(dtoAssembler.buildDO(obj));
+        service.save(objDO);
     }
 
     @RequestMapping(value = "/batch", method = RequestMethod.PUT, produces = "application/json")

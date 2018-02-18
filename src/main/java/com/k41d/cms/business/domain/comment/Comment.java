@@ -1,7 +1,7 @@
 package com.k41d.cms.business.domain.comment;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,9 +20,13 @@ import com.k41d.cms.business.domain.user.User;
 import com.k41d.leyline.framework.domain.LeylineDO;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-@Data
-@Entity
+@Getter
+@Setter
+@Accessors(chain = true)@Entity
 @Table(name="comment")
 @NamedQuery(name="Comment.findAll", query="SELECT c FROM Comment c")
 public class Comment implements Serializable,LeylineDO {
@@ -37,7 +41,7 @@ public class Comment implements Serializable,LeylineDO {
     private String content;
 
     @Column(name="created_at")
-    private LocalDateTime createdAt;
+    private ZonedDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name="user_id")

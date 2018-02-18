@@ -95,7 +95,7 @@ public abstract class LeylineAdminRestCRUD<T extends LeylineDomainService, O ext
         return predicate;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     @JsonView(LeylineView.LIST.class)
@@ -108,7 +108,7 @@ public abstract class LeylineAdminRestCRUD<T extends LeylineDomainService, O ext
         return new PageJSON<>(res, p);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
 
     @SuppressWarnings(value = "unchecked")
     @JsonView(LeylineView.LIST.class)
@@ -119,7 +119,7 @@ public abstract class LeylineAdminRestCRUD<T extends LeylineDomainService, O ext
         return new PageJSON<>(doQueryDSL(p, parameters), p);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @SuppressWarnings(value = "unchecked")
     @JsonView(LeylineView.LIST.class)
     @RequestMapping(value = "/query", method = RequestMethod.GET)
@@ -129,7 +129,7 @@ public abstract class LeylineAdminRestCRUD<T extends LeylineDomainService, O ext
         return new PageJSON<>(doQueryDSL(p, parameters), p);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     @JsonView(LeylineView.LIST.class)
@@ -142,7 +142,7 @@ public abstract class LeylineAdminRestCRUD<T extends LeylineDomainService, O ext
         return dtoAssembler.buildDTO((O) service.findOne(p).orElse(null));
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
 
     @RequestMapping(value = "/batch", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
@@ -153,7 +153,7 @@ public abstract class LeylineAdminRestCRUD<T extends LeylineDomainService, O ext
         service.save(doList);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     @ResponseBody
@@ -161,10 +161,10 @@ public abstract class LeylineAdminRestCRUD<T extends LeylineDomainService, O ext
     public void updateOne(@RequestBody D obj) throws IOException, PersistenceException {
         O objDO = dtoAssembler.buildDO(obj);
         checkUpdate(objDO);
-        service.save(dtoAssembler.buildDO(obj));
+        service.save(objDO);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
 
     @RequestMapping(value = "/batch", method = RequestMethod.PUT, produces = "application/json")
     @ResponseBody
@@ -173,7 +173,7 @@ public abstract class LeylineAdminRestCRUD<T extends LeylineDomainService, O ext
         update(json);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
 
     @RequestMapping(value = "", method = RequestMethod.PUT, produces = "application/json")
     @ResponseBody
@@ -183,10 +183,11 @@ public abstract class LeylineAdminRestCRUD<T extends LeylineDomainService, O ext
         checkUpdate(objDO);
         ModelMapper mm = new ModelMapper();
         mm.getConfiguration().setSourceNameTokenizer(NameTokenizers.UNDERSCORE);
+
         return mm.map(service.save(objDO), typeDTO);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
     @ResponseBody
@@ -196,7 +197,7 @@ public abstract class LeylineAdminRestCRUD<T extends LeylineDomainService, O ext
         service.delete(id);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
 
     @RequestMapping(value = "", method = RequestMethod.DELETE, produces = "application/json")
     @ResponseBody
@@ -206,7 +207,7 @@ public abstract class LeylineAdminRestCRUD<T extends LeylineDomainService, O ext
         service.delete(id);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
 
     @RequestMapping(value = "/batch", method = RequestMethod.DELETE, produces = "application/json")
     @ResponseBody

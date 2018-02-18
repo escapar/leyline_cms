@@ -1,6 +1,6 @@
 package com.k41d.cms.infrastructure.security;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,6 +9,8 @@ import com.k41d.leyline.framework.domain.user.LeylineUser;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
@@ -20,15 +22,17 @@ import lombok.Setter;
  * Created by bytenoob on 6/18/16.
  */
 
-@ConfigurationProperties(value = "jwt.properties")
+
+@ConfigurationProperties(prefix = "jwt")
 @Setter
 @Component
+
 public class JWTTokenUtils {
 
     public static String signingKey;
 
     public static Claims parse(final HttpServletRequest request) {
-        final String authHeader = request.getHeader("Authorization");
+        final String authHeader = request.getHeader("X-Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return null;
         }
@@ -46,7 +50,7 @@ public class JWTTokenUtils {
                         .claim("roles", RoleDTO.fromUser(user))
                         .claim("name", user.getName())
                         .claim("id", user.getId())
-                        .setExpiration(AppUtils.fromLocalDateTime(LocalDateTime.now().plusWeeks(1)))
+                        .setExpiration(AppUtils.fromZonedDateTime(ZonedDateTime.now().plusWeeks(1)))
                         .signWith(SignatureAlgorithm.HS256, signingKey)
                         .compact();
     }

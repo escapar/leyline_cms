@@ -2,7 +2,7 @@ package com.k41d.cms.infrastructure.utils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
 
@@ -15,7 +15,7 @@ public class AppUtils {
         return bg.doubleValue();
     }
 
-    public static Date fromLocalDateTime(LocalDateTime ldt){
-        return Date.from(ldt.toInstant(ZoneOffset.UTC));
+    public static Date fromZonedDateTime(ZonedDateTime ldt){
+        return Date.from(ldt.toInstant());
     }
 }
