@@ -109,9 +109,9 @@ public abstract class LeylineDomainService<T extends LeylineRepo, E extends Leyl
 
     @SuppressWarnings(value = "unchecked")
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public E findOne(Long id) throws PersistenceException {
+    public Optional<E> findById(Long id) throws PersistenceException {
         try {
-            return (E) repo.findOne(id);
+            return (Optional<E>) repo.findById(id);
         } catch (Exception e) {
             e.printStackTrace();
             throw new PersistenceException(e.getMessage());
@@ -121,9 +121,9 @@ public abstract class LeylineDomainService<T extends LeylineRepo, E extends Leyl
 
     @SuppressWarnings(value = "unchecked")
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public E findOne(Predicate id) throws PersistenceException {
+    public Optional<E> findOne(Predicate id) throws PersistenceException {
         try {
-            return (E) repo.findOne(id);
+            return (Optional<E>) repo.findOne(id);
         } catch (Exception e) {
             e.printStackTrace();
             throw new PersistenceException(e.getMessage());
@@ -133,15 +133,15 @@ public abstract class LeylineDomainService<T extends LeylineRepo, E extends Leyl
 
     @SuppressWarnings(value = "unchecked")
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public E get(Long id) throws PersistenceException {
-        return findOne(id);
+    public Optional<E> get(Long id) throws PersistenceException {
+        return findById(id);
     }
 
     @SuppressWarnings(value = "unchecked")
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<? extends E> findAll(List<Integer> ids) throws PersistenceException {
         try {
-            return (List<? extends E>) repo.findAll(ids);
+            return (List<? extends E>) repo.findAllById(ids);
         } catch (Exception e) {
             e.printStackTrace();
             throw new PersistenceException(e.getMessage());

@@ -1,6 +1,7 @@
 package com.k41d.cms.business.domain.topic;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +15,6 @@ import javax.persistence.Table;
 
 import com.k41d.cms.business.domain.user.User;
 
-import org.joda.time.DateTime;
 
 import com.k41d.leyline.framework.domain.LeylineDO;
 
@@ -36,7 +36,7 @@ public class TopicLike implements Serializable,LeylineDO {
     private User user;
 
     @Column(name="created_at")
-    private DateTime createdAt;
+    private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name="topic_id")

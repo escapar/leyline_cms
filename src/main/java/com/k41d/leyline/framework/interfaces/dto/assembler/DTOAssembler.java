@@ -2,6 +2,8 @@ package com.k41d.leyline.framework.interfaces.dto.assembler;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.jodah.typetools.TypeResolver;
@@ -58,13 +60,12 @@ public class DTOAssembler<DO extends LeylineDO, DTO extends LeylineDTO> {
     }
 
     public Page buildPageDTO(Page p) {
-        return p.map(new DO2DTOConverter());
+        return p.map(mapper);
     }
 
-    private class DO2DTOConverter implements Converter<DO, DTO> {
-        public DTO convert(DO d) {
-            return buildDTO(d);
-        }
-    }
+    Function<DO, DTO> mapper = (x) -> {
+        Objects.requireNonNull(x);
+        return buildDTO(x);
+    };
 
 }

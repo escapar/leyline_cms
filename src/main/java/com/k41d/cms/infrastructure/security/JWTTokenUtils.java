@@ -1,12 +1,13 @@
 package com.k41d.cms.infrastructure.security;
 
+import java.time.LocalDateTime;
+
 import javax.servlet.http.HttpServletRequest;
 
-
+import com.k41d.cms.infrastructure.utils.AppUtils;
 import com.k41d.leyline.framework.domain.user.LeylineUser;
 
-import org.apache.commons.codec.binary.Base64;
-import org.joda.time.DateTime;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ import lombok.Setter;
  * Created by bytenoob on 6/18/16.
  */
 
-@ConfigurationProperties(locations = "classpath:jwt.properties", prefix = "jwt")
+@ConfigurationProperties(value = "jwt.properties")
 @Setter
 @Component
 public class JWTTokenUtils {
@@ -45,7 +46,7 @@ public class JWTTokenUtils {
                         .claim("roles", RoleDTO.fromUser(user))
                         .claim("name", user.getName())
                         .claim("id", user.getId())
-                        .setExpiration(new DateTime().plusWeeks(1).toDate())
+                        .setExpiration(AppUtils.fromLocalDateTime(LocalDateTime.now().plusWeeks(1)))
                         .signWith(SignatureAlgorithm.HS256, signingKey)
                         .compact();
     }

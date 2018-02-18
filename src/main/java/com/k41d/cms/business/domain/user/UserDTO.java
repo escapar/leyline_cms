@@ -1,17 +1,18 @@
 package com.k41d.cms.business.domain.user;
 
+import java.time.LocalDateTime;
+
 import lombok.Data;
 import com.k41d.leyline.framework.interfaces.dto.LeylineDTO;
 
-import org.joda.time.DateTime;
 
 @Data public class UserDTO implements LeylineDTO {
 
     private long id;
 
-    private DateTime createdAt;
+    private LocalDateTime createdAt;
 
-    private DateTime birthday;
+    private LocalDateTime birthday;
 
     private String mail;
 

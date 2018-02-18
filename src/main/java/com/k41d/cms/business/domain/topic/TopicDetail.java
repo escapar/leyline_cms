@@ -1,6 +1,7 @@
 package com.k41d.cms.business.domain.topic;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
-import org.joda.time.DateTime;
 
 import com.k41d.leyline.framework.domain.LeylineDO;
 
@@ -34,13 +33,13 @@ public class TopicDetail implements Serializable,LeylineDO {
     private String subVersion;
 
     @Column(name="created_at")
-    private DateTime createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name="saved_at")
-    private DateTime savedAt;
+    private LocalDateTime savedAt;
 
     @Column(name="published_at")
-    private DateTime publishedAt;
+    private LocalDateTime publishedAt;
 
     @Column(name="published")
     private boolean published;

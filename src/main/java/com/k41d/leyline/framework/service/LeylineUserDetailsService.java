@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 /**
  * Created by POJO on 6/8/16.
@@ -58,7 +59,7 @@ public abstract class LeylineUserDetailsService<T extends LeylineUserRepo, D ext
         return getCurrentUser() != null && getCurrentUser().getId() == (user.getId());
     }
 
-    public D get(Long id) {
-        return (D) userRepo.findOne(id);
+    public Optional<D> get(Long id) {
+        return userRepo.findById(id);
     }
 }

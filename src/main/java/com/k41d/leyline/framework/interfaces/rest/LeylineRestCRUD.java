@@ -3,7 +3,6 @@ package com.k41d.leyline.framework.interfaces.rest;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.reflect.TypeToken;
 import com.k41d.leyline.framework.domain.user.LeylineUser;
 import com.k41d.leyline.framework.infrastructure.common.exceptions.PersistenceException;
 import com.k41d.leyline.framework.interfaces.dto.LeylineDTO;
@@ -19,6 +18,7 @@ import com.k41d.leyline.framework.domain.LeylineDO;
 
 import org.jodah.typetools.TypeResolver;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.modelmapper.convention.NameTokenizers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,7 +88,7 @@ public abstract class LeylineRestCRUD<T extends LeylineDomainService, O extends 
 
     public Predicate buildPredicate(MultiValueMap<String, String> parameters){
         TypeInformation<O> domainType = ClassTypeInformation.from(classDO);
-        QuerydslBindings bindings = bindingsFactory.createBindingsFor(null, domainType);
+        QuerydslBindings bindings = bindingsFactory.createBindingsFor( domainType);
 
         Predicate predicate = predicateBuilder.getPredicate(domainType, parameters, bindings);
         if (getOwnership() != null) {
@@ -135,7 +135,7 @@ public abstract class LeylineRestCRUD<T extends LeylineDomainService, O extends 
         checkQuery(null);
         parameters.add("id",id.toString());
         Predicate p = buildPredicate(parameters);
-        return dtoAssembler.buildDTO((O) service.findOne(p));
+        return dtoAssembler.buildDTO((O) service.findOne(p).orElse(null));
     }
 
     @RequestMapping(value = "/batch", method = RequestMethod.POST, produces = "application/json")

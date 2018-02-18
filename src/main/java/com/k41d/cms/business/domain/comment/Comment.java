@@ -1,6 +1,7 @@
 package com.k41d.cms.business.domain.comment;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +16,6 @@ import javax.persistence.Table;
 import com.k41d.cms.business.domain.topic.Topic;
 import com.k41d.cms.business.domain.topic.TopicDetail;
 import com.k41d.cms.business.domain.user.User;
-
-import org.joda.time.DateTime;
 
 import com.k41d.leyline.framework.domain.LeylineDO;
 
@@ -38,7 +37,7 @@ public class Comment implements Serializable,LeylineDO {
     private String content;
 
     @Column(name="created_at")
-    private DateTime createdAt;
+    private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name="user_id")

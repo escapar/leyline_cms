@@ -1,5 +1,7 @@
 package com.k41d.leyline.framework.interfaces.rest;
 
+import java.util.Optional;
+
 import com.k41d.leyline.framework.domain.LeylineDO;
 import com.k41d.leyline.framework.domain.LeylineRepo;
 import com.k41d.leyline.framework.interfaces.dto.PageJSON;
@@ -28,8 +30,8 @@ public abstract class LeylineDomainRestCRUD<T extends LeylineRepo, D extends Ley
 
     @SuppressWarnings(value = "unchecked")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public D find(Integer id) {
-        return (D) dao.findOne(id);
+    public Optional<D> find(Integer id) {
+        return dao.findById(id);
     }
 
 

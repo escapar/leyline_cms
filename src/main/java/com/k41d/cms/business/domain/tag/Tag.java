@@ -1,6 +1,7 @@
 package com.k41d.cms.business.domain.tag;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import org.joda.time.DateTime;
 
 import com.k41d.leyline.framework.domain.LeylineDO;
 
@@ -29,6 +29,6 @@ public class Tag implements Serializable,LeylineDO {
     private String name;
 
     @Column(name="created_at")
-    private DateTime createdAt;
+    private LocalDateTime createdAt;
 
 }

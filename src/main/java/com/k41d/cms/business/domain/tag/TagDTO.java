@@ -1,6 +1,7 @@
 package com.k41d.cms.business.domain.tag;
 
-import org.joda.time.DateTime;
+
+import java.time.LocalDateTime;
 
 import lombok.Data;
 import com.k41d.leyline.framework.interfaces.dto.LeylineDTO;
@@ -11,7 +12,7 @@ import com.k41d.leyline.framework.interfaces.dto.LeylineDTO;
 
     private String name;
 
-    private DateTime createdAt;
+    private LocalDateTime createdAt;
 
 
 }

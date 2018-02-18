@@ -3,7 +3,6 @@ package com.k41d.leyline.framework.interfaces.rest;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.reflect.TypeToken;
 import com.k41d.leyline.framework.interfaces.dto.assembler.DTOAssembler;
 import com.k41d.leyline.framework.interfaces.view.LeylineView;
 import com.querydsl.core.types.Predicate;
@@ -18,6 +17,7 @@ import com.k41d.leyline.framework.service.LeylineDomainService;
 import com.k41d.leyline.framework.service.LeylineUserDetailsService;
 import org.jodah.typetools.TypeResolver;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.modelmapper.convention.NameTokenizers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,7 +85,7 @@ public abstract class LeylineAdminRestCRUD<T extends LeylineDomainService, O ext
 
     public Predicate buildPredicate(MultiValueMap<String, String> parameters){
         TypeInformation<O> domainType = ClassTypeInformation.from(classDO);
-        QuerydslBindings bindings = bindingsFactory.createBindingsFor(null, domainType);
+        QuerydslBindings bindings = bindingsFactory.createBindingsFor( domainType);
 
         Predicate predicate = predicateBuilder.getPredicate(domainType, parameters, bindings);
         if (getOwnership() != null) {
@@ -139,7 +139,7 @@ public abstract class LeylineAdminRestCRUD<T extends LeylineDomainService, O ext
         checkQuery(null);
         parameters.add("id",id.toString());
         Predicate p = buildPredicate(parameters);
-        return dtoAssembler.buildDTO((O) service.findOne(p));
+        return dtoAssembler.buildDTO((O) service.findOne(p).orElse(null));
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")

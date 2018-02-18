@@ -1,6 +1,7 @@
 package com.k41d.cms.business.domain.topic;
 
-import org.joda.time.DateTime;
+import java.time.LocalDateTime;
+
 
 import lombok.Data;
 
@@ -14,11 +15,11 @@ import com.k41d.leyline.framework.interfaces.dto.LeylineDTO;
 
     private String subVersion;
 
-    private DateTime createdAt;
+    private LocalDateTime createdAt;
 
-    private DateTime savedAt;
+    private LocalDateTime savedAt;
 
-    private DateTime publishedAt;
+    private LocalDateTime publishedAt;
 
     private boolean published;
 

@@ -1,8 +1,7 @@
 package com.k41d.cms.business.domain.topic;
 
+import java.time.LocalDateTime;
 import java.util.List;
-
-import org.joda.time.DateTime;
 
 import lombok.Data;
 
@@ -15,13 +14,13 @@ import com.k41d.leyline.framework.interfaces.dto.LeylineDTO;
 
     private String name;
 
-    private DateTime createdAt;
+    private LocalDateTime createdAt;
 
     private boolean featured;
 
     private CategoryDTO category;
 
-    private TopicDetailDTO lastest;
+    private TopicDetailDTO latest;
 
     private List<CommentDTO> comments;
 

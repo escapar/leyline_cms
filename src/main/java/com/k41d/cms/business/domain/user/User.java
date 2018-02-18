@@ -1,6 +1,7 @@
 package com.k41d.cms.business.domain.user;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -14,7 +15,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.k41d.cms.infrastructure.security.ROLE_CONSTS;
 
-import org.joda.time.DateTime;
 import org.springframework.data.annotation.Transient;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -36,10 +36,10 @@ public class User implements Serializable,LeylineUser {
     private long id;
 
     @Column(name="created_at")
-    private DateTime createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name="birthday")
-    private DateTime birthday;
+    private LocalDateTime birthday;
 
     @Column(name="mail")
     private String mail;

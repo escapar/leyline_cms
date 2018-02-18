@@ -54,6 +54,6 @@ public class UserService extends LeylineUserDetailsService<UserRepo,User> {
 
 
     public User getByClaims(Claims c) throws Exception {
-        return c == null ? null : repo.findOne(Long.valueOf((Integer)c.get("id")));
+        return c == null ? null : repo.findById(Long.valueOf((Integer)c.get("id"))).orElse(null);
     }
 }

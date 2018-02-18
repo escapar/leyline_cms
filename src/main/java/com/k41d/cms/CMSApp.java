@@ -1,9 +1,11 @@
 package com.k41d.cms;
 
+import java.time.LocalDate;
+
 import com.k41d.leyline.framework.LeylineApp;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.async.DeferredResult;
 import com.fasterxml.classmate.TypeResolver;
 
-import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import springfox.documentation.builders.PathSelectors;
@@ -29,7 +30,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import static springfox.documentation.schema.AlternateTypeRules.newRule;
 
-import static com.google.common.collect.Lists.*;
 
 @EnableJpaRepositories(basePackages = {"com.k41d.cms.business.service","com.k41d.cms.business.domain"})
 @EnableSwagger2
@@ -63,12 +63,12 @@ public class CMSApp extends LeylineApp {
                                 typeResolver.resolve(ResponseEntity.class, WildcardType.class)),
                                 typeResolver.resolve(WildcardType.class)))
                 .useDefaultResponseMessages(false)
-                .globalResponseMessage(RequestMethod.GET,
-                        newArrayList(new ResponseMessageBuilder()
-                                .code(500)
-                                .message("500 message")
-                                .responseModel(new ModelRef("Error"))
-                                .build()))
+//                .globalResponseMessage(RequestMethod.GET,
+//                        newArrayList(new ResponseMessageBuilder()
+//                                .code(500)
+//                                .message("500 message")
+//                                .responseModel(new ModelRef("Error"))
+//                                .build()))
                 //.securitySchemes(newArrayList(apiKey()))
                 //.securityContexts(newArrayList(securityContext()))
                 .enableUrlTemplating(true)

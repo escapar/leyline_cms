@@ -12,6 +12,7 @@ import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 
@@ -23,7 +24,7 @@ import java.util.stream.Stream;
  * Created by POJO on 6/27/16.
  */
 @Configuration
-public class SpringFoxWebMvcConfig extends WebMvcConfigurerAdapter {
+public class SpringFoxWebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
@@ -81,18 +82,18 @@ public class SpringFoxWebMvcConfig extends WebMvcConfigurerAdapter {
         return new CorsFilter(source);
     }
 
-    @Override
-    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-        for (HttpMessageConverter<?> converter : converters) {
-            if (converter instanceof AbstractJackson2HttpMessageConverter) {
-                AbstractJackson2HttpMessageConverter c = (AbstractJackson2HttpMessageConverter) converter;
-                ObjectMapper objectMapper = c.getObjectMapper();
-                objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-            }
-        }
-
-        super.extendMessageConverters(converters);
-    }
+//    @Override
+//    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+//        for (HttpMessageConverter<?> converter : converters) {
+//            if (converter instanceof AbstractJackson2HttpMessageConverter) {
+//                AbstractJackson2HttpMessageConverter c = (AbstractJackson2HttpMessageConverter) converter;
+//                ObjectMapper objectMapper = c.getObjectMapper();
+//                objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+//            }
+//        }
+//
+//        extendMessageConverters(converters);
+//    }
 
 //
 //    @Bean
