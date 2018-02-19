@@ -11,6 +11,7 @@ import lombok.experimental.Accessors;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.k41d.cms.business.domain.category.CategoryDTO;
 import com.k41d.cms.business.domain.comment.CommentDTO;
+import com.k41d.cms.business.domain.tag.TagDTO;
 import com.k41d.cms.interfaces.view.CMSView;
 import com.k41d.leyline.framework.interfaces.dto.LeylineDTO;
 
@@ -38,6 +39,9 @@ public class TopicDTO implements LeylineDTO {
 
     @JsonView(CMSView.LIST.class)
     private List<CommentDTO> comments;
+
+    @JsonView(CMSView.LIST.class)
+    private List<TagDTO> tags;
 
     @JsonView(CMSView.LIST.class)
     private List<TopicDetailDTO> versions;

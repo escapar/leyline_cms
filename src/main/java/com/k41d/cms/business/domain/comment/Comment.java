@@ -50,9 +50,9 @@ public class Comment implements Serializable,LeylineDO {
     @ManyToOne
     @JoinColumn(name="topic_detail_id")
     private TopicDetail topicDetail;
-
-    @ManyToOne
-    @JoinColumn(name="topic_id")
-    private Topic topic;
+//
+//    @ManyToOne
+//    @JoinColumn(name="topic_id")
+//    private Topic topic;
 
 }

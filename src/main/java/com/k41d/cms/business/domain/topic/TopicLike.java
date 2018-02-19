@@ -43,9 +43,9 @@ public class TopicLike implements Serializable,LeylineDO {
     @Column(name="created_at")
     private ZonedDateTime createdAt;
 
-    @ManyToOne
-    @JoinColumn(name="topic_id")
-    private Topic topic;
+//    @ManyToOne
+//    @JoinColumn(name="topic_id")
+//    private Topic topic;
 
 
 }

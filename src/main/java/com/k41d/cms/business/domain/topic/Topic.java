@@ -2,6 +2,7 @@ package com.k41d.cms.business.domain.topic;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -72,8 +73,41 @@ public class Topic implements Serializable,LeylineDO {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="topic_tag",
-            joinColumns={@JoinColumn(name="topic_id")},
-            inverseJoinColumns={@JoinColumn(name="tag_id")})
+            joinColumns={@JoinColumn(name="topic_id", referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="tag_id", referencedColumnName="id")})
     private List<Tag> tags;
 
+    public void setComments(List<Comment> comments) {
+        if(this.getComments()!=null) {
+            this.getComments().clear();
+        }else{
+            this.comments = new ArrayList<>();
+        }
+        if(comments!=null) {
+            this.getComments().addAll(comments);
+        }
+    }
+
+    public void setVersions(List<TopicDetail> versions) {
+        if(this.getVersions()!=null) {
+            this.getVersions().clear();
+        }else{
+            this.versions = new ArrayList<>();
+        }
+        if(versions!=null) {
+            this.getVersions().addAll(versions);
+        }
+    }
+
+
+    public void setLikes(List<TopicLike> likes) {
+        if(this.getLikes()!=null) {
+            this.getLikes().clear();
+        }else{
+            this.likes = new ArrayList<>();
+        }
+        if(likes!=null) {
+            this.getLikes().addAll(likes);
+        }
+    }
 }

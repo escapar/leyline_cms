@@ -1,6 +1,10 @@
 package com.k41d.cms.interfaces.rest;
 
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import com.k41d.cms.business.domain.category.Category;
+import com.k41d.cms.business.domain.topic.TopicDetail;
 import com.k41d.cms.business.service.TagService;
 import com.k41d.cms.business.service.TopicDetailService;
 import com.k41d.cms.business.service.TopicService;
@@ -30,7 +34,12 @@ public class TopicAPI extends LeylineReadonlyRestCRUD<TopicService, Topic, Topic
     public void checkUpdate(Topic t) {
         try {
             t.setTags(ts.save(t.getTags()));
-            t.setLatest(tds.save(t.getLatest())); // temporary solution
+
+            TopicDetail latest = tds.save(t.getLatest());
+            t.setLatest(latest); // temporary solution
+
+            t.setVersions(t.getVersions().stream().filter(i->i.getId()!=latest.getId()).collect(Collectors.toList())); //remove if existed
+            t.getVersions().add(latest);  // add new
         }catch (Exception e){
             e.printStackTrace();
         }

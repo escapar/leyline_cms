@@ -16,12 +16,14 @@ import javax.persistence.Table;
 import com.k41d.leyline.framework.domain.LeylineDO;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 @Accessors(chain = true)
 @Entity
 @Table(name="topic_detail")
@@ -57,9 +59,9 @@ public class TopicDetail implements Serializable,LeylineDO {
 
     @Column(name="content")
     private String content;
-
-    @ManyToOne
-    @JoinColumn(name="topic_id")
-    private Topic topic;
+//
+//    @ManyToOne
+//    @JoinColumn(name="topic_id")
+//    private Topic topic;
 
 }

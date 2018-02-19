@@ -145,10 +145,10 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     @RequestMapping(value = "/batch", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     @SuppressWarnings(value = "unchecked")
-    public void update(@RequestBody String json) throws IOException, PersistenceException {
+    public List<D> update(@RequestBody String json) throws IOException, PersistenceException {
         List<O> doList = dtoAssembler.buildDOList(mapper.readValue(json, typeDTOList));
         checkUpdateBatch(doList);
-        service.save(doList);
+        return dtoAssembler.buildDTOList(service.save(doList));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -156,10 +156,10 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     @ResponseBody
     @SuppressWarnings(value = "unchecked")
-    public void updateOne(@RequestBody D obj) throws IOException, PersistenceException {
+    public D updateOne(@RequestBody D obj) throws IOException, PersistenceException {
         O objDO = dtoAssembler.buildDO(obj);
         checkUpdate(objDO);
-        service.save(objDO);
+        return dtoAssembler.buildDTO((O)service.save(objDO));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -167,8 +167,8 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     @RequestMapping(value = "/batch", method = RequestMethod.PUT, produces = "application/json")
     @ResponseBody
     @SuppressWarnings(value = "unchecked")
-    public void insert(@RequestBody String json) throws IOException, PersistenceException {
-        update(json);
+    public List<D> insert(@RequestBody String json) throws IOException, PersistenceException {
+        return update(json);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -189,9 +189,9 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
     @ResponseBody
     @SuppressWarnings(value = "unchecked")
-    public void delete(@PathVariable Long id) throws PersistenceException {
+    public boolean delete(@PathVariable Long id) throws PersistenceException {
         checkDelete();
-        service.delete(id);
+        return service.delete(id);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -199,9 +199,9 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     @RequestMapping(value = "", method = RequestMethod.DELETE, produces = "application/json")
     @ResponseBody
     @SuppressWarnings(value = "unchecked")
-    public void delete(@RequestBody List<Long> id) throws PersistenceException {
+    public boolean delete(@RequestBody List<Long> id) throws PersistenceException {
         checkDelete();
-        service.delete(id);
+        return service.delete(id);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -209,9 +209,9 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     @RequestMapping(value = "/batch", method = RequestMethod.DELETE, produces = "application/json")
     @ResponseBody
     @SuppressWarnings(value = "unchecked")
-    public void deleteBatch(@RequestBody List<Long> id) throws PersistenceException {
+    public boolean deleteBatch(@RequestBody List<Long> id) throws PersistenceException {
         checkDelete();
-        delete(id);
+        return delete(id);
     }
 
     public LeylineUser getCurrentUser() {
