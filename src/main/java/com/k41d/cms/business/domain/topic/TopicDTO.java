@@ -32,6 +32,9 @@ public class TopicDTO implements LeylineDTO {
     private boolean featured;
 
     @JsonView(CMSView.LIST.class)
+    private boolean multiLang;
+
+    @JsonView(CMSView.LIST.class)
     private CategoryDTO category;
 
     @JsonView(CMSView.LIST.class)

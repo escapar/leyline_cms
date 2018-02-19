@@ -88,7 +88,7 @@ public abstract class LeylineDomainService<T extends LeylineRepo, E extends Leyl
     @SuppressWarnings(value = "unchecked")
     public boolean delete(Long id) throws PersistenceException {
         try {
-            repo.delete(id);
+            repo.deleteById(id);
         } catch (Exception e) {
             e.printStackTrace();
             throw new PersistenceException(e.getMessage());

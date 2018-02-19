@@ -51,6 +51,9 @@ public class Topic implements Serializable,LeylineDO {
     @Column(name="featured")
     private boolean featured;
 
+    @Column(name="multi_lang")
+    private boolean multiLang;
+
     @ManyToOne
     @JoinColumn(name="category_id")
     private Category category;

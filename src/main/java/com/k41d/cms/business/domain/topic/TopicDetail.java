@@ -59,6 +59,9 @@ public class TopicDetail implements Serializable,LeylineDO {
 
     @Column(name="content")
     private String content;
+
+    @Column(name="summary")
+    private String summary;
 //
 //    @ManyToOne
 //    @JoinColumn(name="topic_id")
