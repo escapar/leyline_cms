@@ -120,7 +120,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
 
 
     @SuppressWarnings(value = "unchecked")
-    @JsonView(LeylineView.LIST.class)
+    @JsonView(LeylineView.DETAIL.class)
     @RequestMapping(value = "/query", method = RequestMethod.GET)
     public PageJSON<D> listWithDetail(
             Pageable p, @RequestParam MultiValueMap<String, String> parameters) throws PersistenceException, NoSuchMethodException {
@@ -130,7 +130,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    @JsonView(LeylineView.LIST.class)
+    @JsonView(LeylineView.DETAIL.class)
     @ResponseBody
     @SuppressWarnings(value = "unchecked")
     public D find(@PathVariable Long id,@RequestParam MultiValueMap<String, String> parameters) throws PersistenceException {
