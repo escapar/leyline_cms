@@ -139,9 +139,9 @@ public abstract class LeylineDomainService<T extends LeylineRepo, E extends Leyl
 
     @SuppressWarnings(value = "unchecked")
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public List<? extends E> findAll(List<Integer> ids) throws PersistenceException {
+    public List<E> findAll(List<Integer> ids) throws PersistenceException {
         try {
-            return (List<? extends E>) repo.findAllById(ids);
+            return (List<E>) repo.findAllById(ids);
         } catch (Exception e) {
             e.printStackTrace();
             throw new PersistenceException(e.getMessage());
@@ -150,9 +150,9 @@ public abstract class LeylineDomainService<T extends LeylineRepo, E extends Leyl
 
     @SuppressWarnings(value = "unchecked")
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public List<? extends E> findAll() throws PersistenceException {
+    public List<E> findAll() throws PersistenceException {
         try {
-            return (List<? extends E>) repo.findAll();
+            return (List<E>) repo.findAll();
         } catch (Exception e) {
             e.printStackTrace();
             throw new PersistenceException(e.getMessage());
@@ -161,7 +161,7 @@ public abstract class LeylineDomainService<T extends LeylineRepo, E extends Leyl
 
     @SuppressWarnings(value = "unchecked")
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public Page<? extends E> findAll(Pageable p) throws PersistenceException {
+    public Page<E> findAll(Pageable p) throws PersistenceException {
         try {
             return repo.findAll(p);
         } catch (Exception e) {
@@ -172,7 +172,7 @@ public abstract class LeylineDomainService<T extends LeylineRepo, E extends Leyl
 
     @SuppressWarnings(value = "unchecked")
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public Page<? extends E> findAll(Predicate p, Pageable pageable) throws PersistenceException {
+    public Page<E> findAll(Predicate p, Pageable pageable) throws PersistenceException {
         try {
             return repo.findAll(p, pageable);
         } catch (Exception e) {
@@ -183,9 +183,9 @@ public abstract class LeylineDomainService<T extends LeylineRepo, E extends Leyl
 
     @SuppressWarnings(value = "unchecked")
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public List<? extends E> findAll(Sort s) throws PersistenceException {
+    public List<E> findAll(Sort s) throws PersistenceException {
         try {
-            return (List<? extends E>) repo.findAll(s);
+            return (List<E>) repo.findAll(s);
         } catch (Exception e) {
             e.printStackTrace();
             throw new PersistenceException(e.getMessage());

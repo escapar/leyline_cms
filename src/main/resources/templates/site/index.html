@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" view="home" layout:decorator="site/layouts/default">
+<head>
+    <title>首页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{/assets/css/sakura.min.css}" type="text/css">
+    <!-- SUPPORT SUKURA CSS , IT'S A FANCY PROJECT. https://github.com/oxalorg/sakura -->
+</head>
+<body layout:fragment="content">
+    <div id="column" th:each="c : ${ct}">
+        <h2>
+            <a th:text="${c.getKey().name}" th:href="${'/'+c.getKey().alias}">专栏标题</a>
+        </h2>
+        <li th:each="t : ${c.getValue()}">
+            <a th:text="${t.name}" th:href="${'/'+c.getKey().alias+'/'+t.id}">文章名</a>
+        </li>
+    </div>
+
+</body>
+</html>

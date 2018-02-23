@@ -38,6 +38,7 @@ public class SpringFoxWebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/favicon.ico")
                 .addResourceLocations("/")
                 .setCachePeriod(0);
+
     }
 
 //
