@@ -1,20 +1,27 @@
 package com.k41d.leyline.framework.infrastructure.configurations;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.annotation.JsonInclude;
+//import com.fasterxml.jackson.databind.ObjectMapper;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.http.converter.HttpMessageConverter;
+//import org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter;
+//import org.springframework.web.cors.CorsConfiguration;
+//import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+//import org.springframework.web.filter.CorsFilter;
+//import org.springframework.web.servlet.config.annotation.CorsRegistry;
+//import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+//import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+//import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+//import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+//import org.springframework.web.servlet.view.ResourceBundleViewResolver;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,21 +31,21 @@ import java.util.stream.Stream;
  * Created by POJO on 6/27/16.
  */
 @Configuration
-public class SpringFoxWebMvcConfig implements WebMvcConfigurer {
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
-
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
-
-        registry.addResourceHandler("/favicon.ico")
-                .addResourceLocations("/")
-                .setCachePeriod(0);
-    }
+public class CorsWebMvsConfig implements WebMvcConfigurer {
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//
+//
+//        registry.addResourceHandler("swagger-ui.html")
+//                .addResourceLocations("classpath:/META-INF/resources/");
+//
+//        registry.addResourceHandler("/webjars/**")
+//                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+//
+//        registry.addResourceHandler("/favicon.ico")
+//                .addResourceLocations("/")
+//                .setCachePeriod(0);
+//    }
 
 //
 //    @Override

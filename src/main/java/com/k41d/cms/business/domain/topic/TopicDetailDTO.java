@@ -44,11 +44,11 @@ public class TopicDetailDTO implements LeylineDTO {
     @JsonView(CMSView.LIST.class)
     private String thumbnail;
 
-    @JsonView(CMSView.LIST.class)
+    @JsonView(CMSView.DETAIL.class)
     private String content;
-
-    @JsonView(CMSView.LIST.class)
-    private TopicDTO topic;
+//
+//    @JsonView(CMSView.LIST.class)
+//    private TopicDTO topic;
 
     @JsonView(CMSView.LIST.class)
     private String summary;

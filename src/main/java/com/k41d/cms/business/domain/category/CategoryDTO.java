@@ -30,10 +30,10 @@ public class CategoryDTO implements LeylineDTO {
     @JsonView(CMSView.LIST.class)
     private String alias;
 
-    @JsonView(CMSView.LIST.class)
+    @JsonView(CMSView.DETAIL.class)
     private ZonedDateTime createdAt;
 
-    @JsonView(CMSView.LIST.class)
+    @JsonView(CMSView.DETAIL.class)
     private CategoryType type;
 
     @JsonView(CMSView.LIST.class)
