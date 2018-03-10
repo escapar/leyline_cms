@@ -14,7 +14,7 @@ import com.vaadin.flow.templatemodel.TemplateModel;
  * Simple template example.
  */
 @Tag("example-template")
-@HtmlImport("/templates/admin/example-template.html")
+@HtmlImport("src/example-template.html")
 @SpringComponent
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class ExampleTemplate extends PolymerTemplate<ExampleTemplate.ExampleModel> {
