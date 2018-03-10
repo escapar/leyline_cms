@@ -25,16 +25,19 @@ public class DTOAssembler<DO extends LeylineDO, DTO extends LeylineDTO> {
 
     public DTOAssembler() {
         Class<?>[] typeArgs = TypeResolver.resolveRawArguments(DTOAssembler.class, getClass());
+        m.getConfiguration().setAmbiguityIgnored(true);
         typeDO = getType(typeArgs[0]);
         typeDTO = getType(typeArgs[1]);
     }
 
     public DTOAssembler(Type DO, Type DTO) {
+        m.getConfiguration().setAmbiguityIgnored(true);
         typeDO = DO;
         typeDTO = DTO;
     }
 
     public DTOAssembler(Class<?> DO, Class<?> DTO) {
+        m.getConfiguration().setAmbiguityIgnored(true);
         typeDO = getType(DO);
         typeDTO = getType(DTO);
     }

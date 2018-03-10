@@ -3,15 +3,7 @@ package com.k41d.cms.business.domain.topic;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.k41d.cms.business.domain.user.User;
 
@@ -37,15 +29,12 @@ public class TopicLike implements Serializable,LeylineDO {
     @Column(name="ip")
     private String ip;
 
-    @Column(name="user_id")
+    @ManyToOne
+    @JoinColumn(name="user_id")
     private User user;
 
     @Column(name="created_at")
     private ZonedDateTime createdAt;
-
-//    @ManyToOne
-//    @JoinColumn(name="topic_id")
-//    private Topic topic;
 
 
 }

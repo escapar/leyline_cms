@@ -1,8 +1,10 @@
 package com.k41d.cms.interfaces.rest;
 
+import java.nio.file.AccessDeniedException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.k41d.cms.business.domain.category.Category;
 import com.k41d.cms.business.domain.topic.TopicDetail;
 import com.k41d.cms.business.domain.topic.TopicDetailDTO;
@@ -12,7 +14,10 @@ import com.k41d.cms.business.service.TopicService;
 import com.k41d.cms.business.domain.topic.Topic;
 import com.k41d.cms.business.domain.topic.TopicDTO;
 
+import com.k41d.cms.infrastructure.security.ROLE_CONSTS;
 import com.k41d.leyline.framework.interfaces.dto.assembler.DTOAssembler;
+import com.k41d.leyline.framework.interfaces.view.LeylineView;
+import com.querydsl.core.types.Predicate;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -57,9 +62,21 @@ public class TopicAPI extends LeylineReadonlyRestCRUD<TopicService, Topic, Topic
         return dtoAssembler.buildDTO(service.publish(id));
     }
 
-    @RequestMapping(value = "/draft/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/draft/{id}", method = RequestMethod.POST)
     public TopicDetailDTO draft(@RequestBody TopicDetailDTO dto, @PathVariable long id) throws PersistenceException, NoSuchMethodException {
-        DTOAssembler<TopicDetail,TopicDetailDTO> tdmm = new DTOAssembler<>();
+        DTOAssembler<TopicDetail,TopicDetailDTO> tdmm = new DTOAssembler<>(TopicDetail.class,TopicDetailDTO.class);
         return tdmm.buildDTO(service.draft(tdmm.buildDO(dto),id));
     }
+
+    @RequestMapping(value = "/admin/{id}", method = RequestMethod.GET, produces = "application/json")
+    @JsonView(LeylineView.ADMIN.class)
+    @ResponseBody
+    @SuppressWarnings(value = "unchecked")
+    public TopicDTO findAdmin(@PathVariable Long id,@RequestParam MultiValueMap<String, String> parameters) throws Exception {
+        if(getCurrentUser() == null || getCurrentUser().getRole() != ROLE_CONSTS.ADMIN.val){
+            throw new AccessDeniedException("Unauthorized");
+        }
+        return find(id,parameters);
+    }
+
 }

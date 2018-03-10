@@ -12,6 +12,7 @@ import com.k41d.leyline.framework.service.LeylineDomainService;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +42,9 @@ public class TopicService extends LeylineDomainService<TopicRepo,Topic> {
         if(!op.isPresent()) throw new PersistenceException("Invalid ID");
 
         Topic t = op.get();
+        if(draft.getId()>0 && !draft.getMainVersion().equals("draft")){
+            draft.setId(0);
+        }
         draft = topicDetailService.save(draft.setSubVersion("draft").setMainVersion("draft").setCreatedAt(ZonedDateTime.now()));
         repo.save(t.setDraft(draft));
         return draft;
@@ -51,9 +55,10 @@ public class TopicService extends LeylineDomainService<TopicRepo,Topic> {
         if(!op.isPresent()) throw new PersistenceException("Invalid ID");
 
         Topic t = op.get();
-        TopicLike tl = topicLikeRepo.save(new TopicLike().setCreatedAt(ZonedDateTime.now()).setUser((User)getCurrentUser()).setIp(ip));
+        TopicLike tl = new TopicLike().setCreatedAt(ZonedDateTime.now()).setIp(ip).setUser((User)getCurrentUser());
 
-        List<TopicLike> likes = t.getLikes();
+        List<TopicLike> likes = new ArrayList<>();
+        likes.addAll(t.getLikes());
         likes.add(tl);
         t.setLikes(likes);
         return repo.save(t);
@@ -71,7 +76,7 @@ public class TopicService extends LeylineDomainService<TopicRepo,Topic> {
                     TopicDetail persistedLatest = persisted.get().getLatest();
                     TopicDetail transientLatest = entity.getLatest();
 
-                    if(!persistedLatest.contentEquals(transientLatest.getContent())) {
+                    if(!persistedLatest.contentEquals(transientLatest)) {
                         // updates a new version
                         transientLatest = transientLatest.upgradeSubVersion(persistedLatest.fillInVersion().getSubVersion()).setPublished(false).setCreatedAt(ZonedDateTime.now());
                         persistedLatest = topicDetailService.save(transientLatest);
