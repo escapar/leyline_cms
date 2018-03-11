@@ -5,9 +5,8 @@
 
     <groupId>com.k41d.leyline</groupId>
     <artifactId>cms</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-RC1</version>
     <packaging>jar</packaging>
-    <!--<packaging>war</packaging>-->
 
     <name>Leyline CMS</name>
     <description>A Brandnew Development Stack</description>
@@ -22,38 +21,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <vaadin.version>10.0.0.beta1</vaadin.version>
-        <spring-boot.version>2.0.0.RELEASE</spring-boot.version>
-        <webapp.directory>src/main/webapp</webapp.directory>
-
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-core</artifactId>
-            <version>${vaadin.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>flow-spring-boot-starter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Added to provide logging output as Flow uses -->
-        <!-- the unbound SLF4J no-operation (NOP) logger implementation -->
-        <!--<dependency>-->
-            <!--<groupId>org.slf4j</groupId>-->
-            <!--<artifactId>slf4j-simple</artifactId>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
@@ -98,14 +68,14 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>io.springfox</groupId>-->
-            <!--<artifactId>springfox-swagger2</artifactId>-->
-            <!--<version>LATEST</version>-->
+        <!--<groupId>io.springfox</groupId>-->
+        <!--<artifactId>springfox-swagger2</artifactId>-->
+        <!--<version>LATEST</version>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>io.springfox</groupId>-->
-            <!--<artifactId>springfox-swagger-ui</artifactId>-->
-            <!--<version>LATEST</version>-->
+        <!--<groupId>io.springfox</groupId>-->
+        <!--<artifactId>springfox-swagger-ui</artifactId>-->
+        <!--<version>LATEST</version>-->
         <!--</dependency>-->
 
         <dependency>
@@ -120,14 +90,14 @@
 </dependency>
 -->
         <!--<dependency>-->
-            <!--<groupId>com.google.auto.service</groupId>-->
-            <!--<artifactId>auto-service</artifactId>-->
-            <!--<version>LATEST</version>-->
+        <!--<groupId>com.google.auto.service</groupId>-->
+        <!--<artifactId>auto-service</artifactId>-->
+        <!--<version>LATEST</version>-->
         <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-undertow</artifactId>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity4</artifactId>
@@ -150,12 +120,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -181,9 +145,9 @@
             <scope>test</scope>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>com.google.guava</groupId>-->
-            <!--<artifactId>guava</artifactId>-->
-            <!--<version>LATEST</version>-->
+        <!--<groupId>com.google.guava</groupId>-->
+        <!--<artifactId>guava</artifactId>-->
+        <!--<version>LATEST</version>-->
         <!--</dependency>-->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -246,11 +210,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-devtools</artifactId>
-                <optional>true</optional>
-            </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
 
     </dependencies>
 
@@ -287,113 +251,10 @@
                     </dependency>
                 </dependencies>
             </plugin>
-
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>3.0.0</version>
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>${webapp.directory}/frontend-es5</directory>
-                        </fileset>
-                        <fileset>
-                            <directory>${webapp.directory}/frontend-es6</directory>
-                        </fileset>
-                    </filesets>
-                </configuration>
-            </plugin>
         </plugins>
-        <!--<pluginManagement>-->
-            <!--<plugins>-->
-                <!--<plugin>-->
-                    <!--<groupId>org.apache.maven.plugins</groupId>-->
-                    <!--<artifactId>maven-war-plugin</artifactId>-->
-                    <!--<version>3.1.0</version>-->
-                    <!--<configuration>-->
-                        <!--<packagingExcludes>-->
-                            <!--%regex[WEB-INF/lib/slf4j-simple.*.jar],-->
-                            <!--%regex[WEB-INF/lib/tomcat.*.jar]-->
-                        <!--</packagingExcludes>-->
-                    <!--</configuration>-->
-                <!--</plugin>-->
-            <!--</plugins>-->
-        <!--</pluginManagement>-->
-
     </build>
-
-    <profiles>
-    <profile>
-    <id>productionMode</id>
-    <activation>
-        <property>
-            <name>vaadin.productionMode</name>
-        </property>
-    </activation>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>flow-server-production-mode</artifactId>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.vaadin</groupId>
-                <artifactId>flow-maven-plugin</artifactId>
-                <version>1.0.0.beta2</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>copy-production-files</goal>
-                            <goal>package-for-production</goal>
-                        </goals>
-                        <configuration>
-                            <transpileOutputDirectory>${webapp.directory}</transpileOutputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
-                <configuration>
-                    <jvmArguments>-Dvaadin.productionMode</jvmArguments>
-                </configuration>
-            </plugin>
-        </plugins>
-
-    </build>
-    </profile>
-    </profiles>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-bom</artifactId>
-                <version>${vaadin.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <repositories>
-        <repository>
-            <id>vaadin-prereleases</id>
-            <url>https://maven.vaadin.com/vaadin-prereleases</url>
-        </repository>
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
@@ -409,16 +270,20 @@
     </repositories>
     <pluginRepositories>
         <pluginRepository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
             <url>https://repo.spring.io/milestone</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </pluginRepository>
-        <pluginRepository>
-            <id>vaadin-prereleases</id>
-            <url>https://maven.vaadin.com/vaadin-prereleases</url>
         </pluginRepository>
     </pluginRepositories>
 
