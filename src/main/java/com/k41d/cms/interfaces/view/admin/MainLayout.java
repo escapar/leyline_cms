@@ -1,7 +1,7 @@
 package com.k41d.cms.interfaces.view.admin;
 
-import com.k41d.cms.interfaces.view.admin.views.topics.TopicsList;
 
+import com.k41d.cms.interfaces.view.admin.views.topics.TopicsList;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;

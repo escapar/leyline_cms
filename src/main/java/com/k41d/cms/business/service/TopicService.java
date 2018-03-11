@@ -24,8 +24,8 @@ public class TopicService extends LeylineDomainService<TopicRepo,Topic> {
     @Autowired
     TopicLikeRepo topicLikeRepo;
 
-    public List<Topic> findByName(String name){
-        return repo.findByName(name);
+    public List<Topic> findByNameLike(String name){
+        return repo.findByNameLike("%"+name+"%");
     }
     public Topic publish(long id) throws PersistenceException {
         Optional<Topic> op = get(id);

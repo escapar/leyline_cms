@@ -31,9 +31,11 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -49,10 +51,12 @@ public class TopicsList extends VerticalLayout {
     private final TextField searchField = new TextField("", "Search");
     private final Grid<Topic> grid = new Grid<>();
 
-    private final TopicEditorDialog form;
+    private final TopicEditorForm form;
+    private RouterLink topicsForm;
 
     @Autowired
-    public TopicsList(TopicService topicService) throws PersistenceException {
+    public TopicsList(TopicService topicService, TopicEditorForm form) throws PersistenceException {
+        this.form = form;
         this.topicService = topicService;
         initView();
 
@@ -60,19 +64,7 @@ public class TopicsList extends VerticalLayout {
         addGrid();
 
         updateView();
-        form = new TopicEditorDialog((topic, operation) -> {
-            try {
-                saveTopic(topic, operation);
-            } catch (PersistenceException e) {
-                e.printStackTrace();
-            }
-        }, topic1 -> {
-            try {
-                deleteTopic(topic1);
-            } catch (PersistenceException e) {
-                e.printStackTrace();
-            }
-        });
+        form.init();
     }
 
     private void initView() {
@@ -88,7 +80,7 @@ public class TopicsList extends VerticalLayout {
         searchField.addClassName("view-toolbar__search-field");
         searchField.addValueChangeListener(e -> {
             try {
-                updateView();
+                updateView(e.getValue());
             } catch (PersistenceException e1) {
                 e1.printStackTrace();
             }
@@ -97,16 +89,26 @@ public class TopicsList extends VerticalLayout {
         Button newButton = new Button("New Topic", new Icon("lumo", "plus"));
         newButton.getElement().setAttribute("theme", "primary");
         newButton.addClassName("view-toolbar__button");
-        newButton.addClickListener(e -> form.open(new Topic(),
-                AbstractEditorDialog.Operation.ADD));
-
+//        newButton.addClickListener(e -> form.open(new Topic(),
+//                AbstractEditorDialog.Operation.ADD));
+        newButton.addClickListener(e->{newButton.getUI().ifPresent(ui -> ui.navigate("topics/edit"));});
         viewToolbar.add(searchField, newButton);
         add(viewToolbar);
     }
 
     private void addGrid() {
-        grid.addColumn(Topic::getName).setHeader("Topic");
-        grid.addColumn(this::getReviewCount).setHeader("Beverages");
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd-MM-yy");
+        grid.addColumn(Topic::getName).setHeader("标题");
+        grid.addColumn(topic->topic.getCategory().getName()).setHeader("栏目");
+        grid.addColumn(topic->
+                topic.getLatestPublished() == null ? "/"+topic.getLatest().getVersionString() :
+                        topic.getLatestPublished().getVersionString()+"/"+topic.getLatest().getVersionString()).setHeader("发布版本/最新版本");
+        grid.addColumn(topic->
+                topic.getLatestPublished() == null ?
+                        "/"+f.format(topic.getLatest().getCreatedAt()) :
+                        f.format(topic.getLatestPublished().getPublishedAt())+"/"+f.format(topic.getLatest().getCreatedAt())).setHeader("发布日期/创建日期");
+        grid.addColumn(topic->topic.getLikes().size()).setHeader("点赞数");
+
         grid.addColumn(new ComponentRenderer<>(this::createEditButton))
                 .setFlexGrow(0);
         
@@ -116,8 +118,10 @@ public class TopicsList extends VerticalLayout {
     }
 
     private Button createEditButton(Topic topic) {
-        Button edit = new Button("Edit", event -> form.open(topic,
-                AbstractEditorDialog.Operation.EDIT));
+//        Button edit = new Button("Edit", event -> form.open(topic,
+//                AbstractEditorDialog.Operation.EDIT));
+        Button edit = new Button("Edit");
+        edit.addClickListener(e->{edit.getUI().ifPresent(ui -> ui.navigate("topics/edit"));});
         edit.setIcon(new Icon("lumo", "edit"));
         edit.addClassName("review__edit");
         edit.getElement().setAttribute("theme", "tertiary");
@@ -136,6 +140,12 @@ public class TopicsList extends VerticalLayout {
         List<Topic> topics = (List<Topic>)topicService.findAll();
         grid.setItems(topics);
     }
+
+    private void updateView(String search) throws PersistenceException {
+        List<Topic> topics = (List<Topic>)topicService.findByNameLike(search);
+        grid.setItems(topics);
+    }
+
 
     private void saveTopic(Topic topic,
             AbstractEditorDialog.Operation operation) throws PersistenceException {

@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.k41d.cms.interfaces.view.admin.views.topics;
+package com.k41d.cms.interfaces.view.admin.views.categories;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -30,13 +30,13 @@ import org.springframework.beans.factory.annotation.Autowired;
  * A dialog for editing {@link Topic} objects.
  */
 @SpringComponent
-public class TopicEditorDialog extends AbstractEditorDialog<Topic> {
+public class CategoryEditorDialog extends AbstractEditorDialog<Topic> {
 
     private final TextField categoryNameField = new TextField("Topic Name");
     private final TopicService service;
 
     @Autowired
-    public TopicEditorDialog(TopicService topicService){
+    public CategoryEditorDialog(TopicService topicService){
         this.service = topicService;
     }
 

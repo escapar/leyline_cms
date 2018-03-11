@@ -83,6 +83,12 @@ public class TopicDetail implements Serializable,LeylineDO {
     public TopicDetail upgradeMainVersion(String previous){
         return setMainVersion(VersionUtil.nextMainVersion(previous)).setSubVersion("0");
     }
+
+    public String getVersionString(){
+        this.fillInVersion();
+        return mainVersion + '.' + subVersion;
+    }
+
     public boolean contentEquals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

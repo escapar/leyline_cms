@@ -116,7 +116,7 @@ public abstract class AbstractEditorDialog<T extends Serializable>
      * @param itemDeleter
      *            Callback to delete the edited item
      */
-    protected AbstractEditorDialog(String itemType,
+    protected void dialogInit(String itemType,
             BiConsumer<T, Operation> itemSaver, Consumer<T> itemDeleter) {
         this.itemType = itemType;
         this.itemSaver = itemSaver;

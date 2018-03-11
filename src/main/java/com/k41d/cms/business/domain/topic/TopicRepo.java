@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface TopicRepo extends LeylineRepo<Topic> {
-    List<Topic> findByName(String name);
+    List<Topic> findByNameLike(String name);
 }
