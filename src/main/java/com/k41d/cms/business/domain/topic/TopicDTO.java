@@ -23,6 +23,9 @@ public class TopicDTO implements LeylineDTO {
     private long id;
 
     @JsonView(CMSView.LIST.class)
+    private long latestId;
+
+    @JsonView(CMSView.LIST.class)
     private String name;
 
     @JsonView(CMSView.LIST.class)
@@ -38,15 +41,18 @@ public class TopicDTO implements LeylineDTO {
     private CategoryDTO category;
 
     @JsonView(CMSView.LIST.class)
+    private TopicDetailDTO latestPublished;
+
+    @JsonView(CMSView.ADMIN.class)
     private TopicDetailDTO latest;
 
-    @JsonView(CMSView.LIST.class)
+    @JsonView(CMSView.DETAIL.class)
     private List<CommentDTO> comments;
 
     @JsonView(CMSView.LIST.class)
     private List<TagDTO> tags;
 
-    @JsonView(CMSView.LIST.class)
+    @JsonView(CMSView.DETAIL.class)
     private List<TopicDetailDTO> versions;
 
     @JsonView(CMSView.LIST.class)

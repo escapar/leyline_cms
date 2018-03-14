@@ -102,7 +102,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     @ResponseBody
     @SuppressWarnings(value = "unchecked")
     public PageJSON<D> list(Pageable p) throws PersistenceException {
-        checkQuery(null);
+        checkQuery(p);
         Page res = service.findAll(p);
         res = dtoAssembler.buildPageDTO(res);
         return new PageJSON<>(res, p);
@@ -134,7 +134,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     @ResponseBody
     @SuppressWarnings(value = "unchecked")
     public D find(@PathVariable Long id,@RequestParam MultiValueMap<String, String> parameters) throws PersistenceException {
-        checkQuery(null);
+        checkQuery(id);
         parameters.add("id",id.toString());
         Predicate p = buildPredicate(parameters);
         return dtoAssembler.buildDTO((O) service.findOne(p).orElse(null));
@@ -180,7 +180,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
         O objDO = dtoAssembler.buildDO(obj);
         checkUpdate(objDO);
         ModelMapper mm = new ModelMapper();
-        mm.getConfiguration().setSourceNameTokenizer(NameTokenizers.UNDERSCORE);
+        mm.getConfiguration().setSourceNameTokenizer(NameTokenizers.UNDERSCORE).setAmbiguityIgnored(true);
         return mm.map(service.save(objDO), typeDTO);
     }
 

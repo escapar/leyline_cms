@@ -9,4 +9,8 @@ public class LeylineView {
 
     public interface DETAIL extends LIST {
     }
+
+
+    public interface ADMIN extends DETAIL {
+    }
 }

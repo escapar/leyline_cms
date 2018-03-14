@@ -62,6 +62,14 @@ public class Topic implements Serializable,LeylineDO {
     @JoinColumn(name="latest_topic_detail_id")
     private TopicDetail latest;
 
+    @ManyToOne
+    @JoinColumn(name="draft_topic_detail_id")
+    private TopicDetail draft;
+
+    @ManyToOne
+    @JoinColumn(name="latest_published_topic_detail_id")
+    private TopicDetail latestPublished;
+
     @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     @JoinColumn(name="topic_id")
     private List<Comment> comments;
@@ -79,6 +87,12 @@ public class Topic implements Serializable,LeylineDO {
             joinColumns={@JoinColumn(name="topic_id", referencedColumnName="id")},
             inverseJoinColumns={@JoinColumn(name="tag_id", referencedColumnName="id")})
     private List<Tag> tags;
+
+    public Topic addNewVersion(TopicDetail td){
+        latest = td;
+        versions.add(td);
+        return this;
+    }
 
     public void setComments(List<Comment> comments) {
         if(this.getComments()!=null) {

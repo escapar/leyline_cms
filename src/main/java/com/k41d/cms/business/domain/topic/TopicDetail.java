@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.k41d.cms.business.domain.commons.VersionUtil;
 import com.k41d.leyline.framework.domain.LeylineDO;
 
 import lombok.Data;
@@ -42,9 +43,6 @@ public class TopicDetail implements Serializable,LeylineDO {
     @Column(name="created_at")
     private ZonedDateTime createdAt;
 
-    @Column(name="saved_at")
-    private ZonedDateTime savedAt;
-
     @Column(name="published_at")
     private ZonedDateTime publishedAt;
 
@@ -66,5 +64,42 @@ public class TopicDetail implements Serializable,LeylineDO {
 //    @ManyToOne
 //    @JoinColumn(name="topic_id")
 //    private Topic topic;
+
+    public TopicDetail fillInVersion(){
+        // to ensure we've got version for every instance
+        if(mainVersion == null || mainVersion.isEmpty()){
+            mainVersion = "0";
+        }
+        if(subVersion == null || subVersion.isEmpty()){
+            subVersion = "0";
+        }
+        return this;
+    }
+
+    public TopicDetail upgradeSubVersion(String previous){
+        return setSubVersion(VersionUtil.nextSubVersion(previous));
+    }
+
+    public TopicDetail upgradeMainVersion(String previous){
+        return setMainVersion(VersionUtil.nextMainVersion(previous)).setSubVersion("0");
+    }
+
+    public String getVersionString(){
+        this.fillInVersion();
+        return mainVersion + '.' + subVersion;
+    }
+
+    public boolean contentEquals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+//        if (!super.equals(o)) return false;
+
+        TopicDetail that = (TopicDetail) o;
+
+        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        if (thumbnail != null ? !thumbnail.equals(that.thumbnail) : that.thumbnail != null) return false;
+        if (content != null ? !content.equals(that.content) : that.content != null) return false;
+        return summary != null ? summary.equals(that.summary) : that.summary == null;
+    }
 
 }
