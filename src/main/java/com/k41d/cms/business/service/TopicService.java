@@ -31,6 +31,9 @@ public class TopicService extends LeylineDomainService<TopicRepo,Topic> {
     public List<Topic> findLatestByCategory(Category c){
         return repo.findTop5ByCategoryOrderByCreatedAtDesc(c);
     }
+    public List<Topic> findLatest3(){
+        return repo.findTop3ByOrderByCreatedAtDesc();
+    }
 
     public List<Topic> findByNameLike(String name){
         return repo.findByNameLike("%"+name+"%");
