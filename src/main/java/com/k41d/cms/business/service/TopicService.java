@@ -1,5 +1,6 @@
 package com.k41d.cms.business.service;
 
+import com.k41d.cms.business.domain.category.Category;
 import com.k41d.cms.business.domain.commons.VersionUtil;
 import com.k41d.cms.business.domain.topic.*;
 
@@ -23,6 +24,13 @@ public class TopicService extends LeylineDomainService<TopicRepo,Topic> {
     TopicDetailService topicDetailService;
     @Autowired
     TopicLikeRepo topicLikeRepo;
+
+    public List<Topic> findByCategory(Category c){
+        return repo.findByCategoryOrderByCreatedAtDesc(c);
+    }
+    public List<Topic> findLatestByCategory(Category c){
+        return repo.findTop5ByCategoryOrderByCreatedAtDesc(c);
+    }
 
     public List<Topic> findByNameLike(String name){
         return repo.findByNameLike("%"+name+"%");
