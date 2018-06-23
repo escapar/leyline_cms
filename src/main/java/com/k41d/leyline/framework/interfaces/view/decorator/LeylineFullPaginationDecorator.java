@@ -22,17 +22,17 @@
 //
 //@Component
 //@AutoService(PaginationDecorator.class)
-//public final class LeylineFullPaginationDecorator implements PaginationDecorator {
-//    private static final String DEFAULT_CLASS = "pagination";
-//    private static final String BUNDLE_NAME = org.thymeleaf.dialect.springdata.decorator.FullPaginationDecorator.class.getSimpleName();
-//    private static final int DEFAULT_PAGE_SPLIT = 7;
-//    private static final String SLASH = "/";
-//    private static final String HTML = ".html";
+//public  class LeylineFullPaginationDecorator implements PaginationDecorator {
+//    private static  String DEFAULT_CLASS = "pagination";
+//    private static  String BUNDLE_NAME = org.thymeleaf.dialect.springdata.decorator.FullPaginationDecorator.class.getSimpleName();
+//    private static  int DEFAULT_PAGE_SPLIT = 7;
+//    private static  String SLASH = "/";
+//    private static  String HTML = ".html";
 //
-//    private static String createPageUrl(final Arguments arguments, int pageNumber) {
+//    private static String createPageUrl( Arguments arguments, int pageNumber) {
 //        String prefix = getParamPrefix(arguments);
-//        final Collection<String> excludedParams = Arrays.asList(new String[]{prefix.concat(PAGE)});
-//        final String baseUrl = buildBaseUrl(arguments, excludedParams).replaceAll("(\\/page\\/\\d*)+(\\.html|.)", "");
+//         Collection<String> excludedParams = Arrays.asList(new String[]{prefix.concat(PAGE)});
+//         String baseUrl = buildBaseUrl(arguments, excludedParams).replaceAll("(\\/page\\/\\d*)+(\\.html|.)", "");
 //
 //        return buildUrl(baseUrl, pageNumber, arguments).toString();
 //    }
@@ -47,16 +47,16 @@
 //        return prefix == null ? EMPTY : prefix.concat("_");
 //    }
 //
-//    private static String buildBaseUrl(final Arguments arguments, Collection<String> excludeParams) {
+//    private static String buildBaseUrl( Arguments arguments, Collection<String> excludeParams) {
 //        //URL defined with pagination-url tag
-//        final String url = (String) arguments.getLocalVariable(Keys.PAGINATION_URL_KEY);
+//         String url = (String) arguments.getLocalVariable(Keys.PAGINATION_URL_KEY);
 //
-//        final IContext context = arguments.getContext();
+//         IContext context = arguments.getContext();
 //        if (url == null && context instanceof IWebContext) {
 //            //Creates url from actual request URI and parameters
-//            final StringBuilder builder = new StringBuilder();
-//            final IWebContext webContext = (IWebContext) context;
-//            final HttpServletRequest request = webContext.getHttpServletRequest();
+//             StringBuilder builder = new StringBuilder();
+//             IWebContext webContext = (IWebContext) context;
+//             HttpServletRequest request = webContext.getHttpServletRequest();
 //
 //            //URL base path from request
 //            builder.append(request.getRequestURI());
@@ -106,7 +106,7 @@
 //        return "full-static";
 //    }
 //
-//    public final String decorate(Element element, Arguments arguments) {
+//    public  String decorate(Element element, Arguments arguments) {
 //
 //        Page<?> page = PageUtils.findPage(arguments);
 //
@@ -137,7 +137,7 @@
 //        return Messages.getMessage(BUNDLE_NAME, "pagination", locale, clas, laquo, previous, pageLinks, next, raquo);
 //    }
 //
-//    private String createPageLinks(final Page<?> page, final Arguments arguments) {
+//    private String createPageLinks( Page<?> page,  Arguments arguments) {
 //        int pageSplit = DEFAULT_PAGE_SPLIT;
 //        if (arguments.hasLocalVariable(Keys.PAGINATION_SPLIT_KEY)) {
 //            pageSplit = (Integer) arguments.getLocalVariable(Keys.PAGINATION_SPLIT_KEY);
@@ -200,7 +200,7 @@
 //        return Messages.getMessage(BUNDLE_NAME, "link", locale, url, pageNumber);
 //    }
 //
-//    private String getPreviousPageLink(Page<?> page, final Arguments arguments) {
+//    private String getPreviousPageLink(Page<?> page,  Arguments arguments) {
 //        int previousPage = page.getNumber() - 1;
 //        String msgKey = previousPage < 0 ? "previous.page" : "previous.page.link";
 //        Locale locale = arguments.getContext().getLocale();
@@ -209,7 +209,7 @@
 //        return Messages.getMessage(BUNDLE_NAME, msgKey, locale, link);
 //    }
 //
-//    private String getNextPageLink(Page<?> page, final Arguments arguments) {
+//    private String getNextPageLink(Page<?> page,  Arguments arguments) {
 //        int nextPage = page.getNumber() + 1;
 //        int totalPages = page.getTotalPages();
 //        String msgKey = nextPage == totalPages ? "next.page" : "next.page.link";

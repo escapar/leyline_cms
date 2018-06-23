@@ -22,7 +22,7 @@ public class UserAPI extends LeylineReadonlyRestCRUD<UserService, User, UserDTO>
 
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public @ResponseBody TokenDTO login(@RequestBody final UserDTO login)
+    public @ResponseBody TokenDTO login(@RequestBody  UserDTO login)
             throws LeylineException {
 
         if (login == null) {

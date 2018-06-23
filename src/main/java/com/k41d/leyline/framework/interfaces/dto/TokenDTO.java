@@ -24,7 +24,7 @@ public class TokenDTO implements Serializable {
         return token;
     }
 
-    public TokenDTO setToken(final String token) {
+    public TokenDTO setToken( String token) {
         this.token = token;
         return this;
     }
@@ -33,7 +33,7 @@ public class TokenDTO implements Serializable {
         return roles;
     }
 
-    public TokenDTO setRoles(final List<String> roles) {
+    public TokenDTO setRoles( List<String> roles) {
         this.roles = roles;
         return this;
     }

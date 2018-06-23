@@ -35,7 +35,7 @@ public class JWTAuthenticationFilter extends StatelessAuthenticationFilter {
             user = userService.getByClaims(c);
             //MDC.put("name", c.get("name"));
             return user;
-        } catch (final Exception e) {
+        } catch ( Exception e) {
             e.printStackTrace();
             return user;
         }

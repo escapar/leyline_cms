@@ -23,7 +23,7 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 public abstract class StatelessAuthenticationFilter extends DelegatingFilterProxy implements Filter {
 
     @Override
-    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain filterChain) throws AccessDeniedException, ServletException, IOException {
+    public void doFilter( ServletRequest request,  ServletResponse response,  FilterChain filterChain) throws AccessDeniedException, ServletException, IOException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         Authentication authentication = getAuthentication(httpRequest);
         if (authentication == null) {

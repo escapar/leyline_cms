@@ -25,7 +25,7 @@ import com.k41d.leyline.framework.interfaces.dto.LeylineDTO;
         return username;
     }
 
-    public RoleDTO setUsername(final String username) {
+    public RoleDTO setUsername( String username) {
         this.username = username;
         return this;
     }
@@ -34,7 +34,7 @@ import com.k41d.leyline.framework.interfaces.dto.LeylineDTO;
         return displayName;
     }
 
-    public RoleDTO setDisplayName(final String displayName) {
+    public RoleDTO setDisplayName( String displayName) {
         this.displayName = displayName;
         return this;
     }
@@ -43,7 +43,7 @@ import com.k41d.leyline.framework.interfaces.dto.LeylineDTO;
         return avatar;
     }
 
-    public RoleDTO setAvatar(final String avatar) {
+    public RoleDTO setAvatar( String avatar) {
         this.avatar = avatar;
         return this;
     }
@@ -52,7 +52,7 @@ import com.k41d.leyline.framework.interfaces.dto.LeylineDTO;
         return roles;
     }
 
-    public RoleDTO setRoles(final List<String> roles) {
+    public RoleDTO setRoles( List<String> roles) {
         this.roles = roles;
         return this;
     }

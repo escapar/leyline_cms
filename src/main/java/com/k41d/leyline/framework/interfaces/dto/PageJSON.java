@@ -12,15 +12,15 @@ import java.util.List;
  * Created by bytenoob on 6/10/16.
  */
 public class PageJSON<T> extends org.springframework.data.domain.PageImpl<T> {
-    public PageJSON(final List<T> content, final Pageable pageable, final long total) {
+    public PageJSON( List<T> content,  Pageable pageable,  long total) {
         super(content, pageable, total);
     }
 
-    public PageJSON(final List<T> content) {
+    public PageJSON( List<T> content) {
         super(content);
     }
 
-    public PageJSON(final Page<T> page, final Pageable pageable) {
+    public PageJSON( Page<T> page,  Pageable pageable) {
         super(page.getContent(), pageable, page.getTotalElements());
     }
 

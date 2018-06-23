@@ -165,7 +165,7 @@ public class User implements Serializable,LeylineUser {
         return role;
     }
 
-    public User setRole(final int role) {
+    public User setRole( int role) {
         this.role = role;
         return this;
     }

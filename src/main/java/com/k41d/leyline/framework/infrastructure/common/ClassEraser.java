@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 
 public class ClassEraser<T> {
 
-    private final Supplier<? extends T> ctor;
+    private  Supplier<? extends T> ctor;
 
 
     public ClassEraser(Supplier<? extends T> ctor) {

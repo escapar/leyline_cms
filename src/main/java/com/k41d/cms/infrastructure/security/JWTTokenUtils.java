@@ -31,20 +31,20 @@ public class JWTTokenUtils {
 
     public static String signingKey;
 
-    public static Claims parse(final HttpServletRequest request) {
-        final String authHeader = request.getHeader("X-Authorization");
+    public static Claims parse( HttpServletRequest request) {
+         String authHeader = request.getHeader("X-Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return null;
         }
         return parse(authHeader.substring(7));
     }
 
-    public static Claims parse(final String token) {
+    public static Claims parse( String token) {
         return Jwts.parser().setSigningKey(signingKey)
                 .parseClaimsJws(token).getBody();
     }
 
-    public static String sign(final LeylineUser user) {
+    public static String sign( LeylineUser user) {
         return user == null ? null :
                 Jwts.builder().setSubject(user.getName())
                         .claim("roles", RoleDTO.fromUser(user))
@@ -59,7 +59,7 @@ public class JWTTokenUtils {
         return signingKey;
     }
 
-    public static void setSigningKey(final String signingKey) {
+    public static void setSigningKey( String signingKey) {
         JWTTokenUtils.signingKey = new String(Base64.encode(signingKey.getBytes()));
     }
 }

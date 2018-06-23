@@ -35,7 +35,7 @@ public class IndexController {
     }
 
     @RequestMapping("/{catName}")
-    public String cat(Model model,@PathVariable(value="catName") final String catName) throws PersistenceException {
+    public String cat(Model model,@PathVariable(value="catName")  String catName) throws PersistenceException {
         addMenuCategories(model);
         Category c = categoryService.findOneByAlias(catName);
         if(c != null){
@@ -53,7 +53,7 @@ public class IndexController {
     }
 
     @RequestMapping("/{catName}/{topicId}")
-    public String topic(Model model,@PathVariable(value="catName") final String catName,@PathVariable(value="topicId") final Long topicId) throws PersistenceException {
+    public String topic(Model model,@PathVariable(value="catName")  String catName,@PathVariable(value="topicId")  Long topicId) throws PersistenceException {
         addMenuCategories(model);
         Optional<Topic> t = topicService.findById(topicId);
         if(t.isPresent()){

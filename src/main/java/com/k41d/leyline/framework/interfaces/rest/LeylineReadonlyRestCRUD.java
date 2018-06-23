@@ -44,18 +44,18 @@ import java.util.List;
 @EnableSpringDataWebSupport
 @RestController
 public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O extends LeylineDO, D extends LeylineDTO> {
-    public static final QuerydslBindingsFactory bindingsFactory = new QuerydslBindingsFactory(SimpleEntityPathResolver.INSTANCE);
-    public static final QuerydslPredicateBuilder predicateBuilder = new QuerydslPredicateBuilder(new DefaultConversionService(), bindingsFactory.getEntityPathResolver());
-    public final Logger logger = LoggerFactory.getLogger(getClass());
-    public final Class<?>[] typeArgs;
-    public final Type typeService;
-    public final Type typeDTO;
-    public final Type typeDO;
-    public final Class<T> classService;
-    public final Class<D> classDTO;
-    public final Class<O> classDO;
-    public final JavaType typeDTOList;
-    public final JavaType typeDOList;
+    public static  QuerydslBindingsFactory bindingsFactory = new QuerydslBindingsFactory(SimpleEntityPathResolver.INSTANCE);
+    public static  QuerydslPredicateBuilder predicateBuilder = new QuerydslPredicateBuilder(new DefaultConversionService(), bindingsFactory.getEntityPathResolver());
+    public  Logger logger = LoggerFactory.getLogger(getClass());
+    public  Class<?>[] typeArgs;
+    public  Type typeService;
+    public  Type typeDTO;
+    public  Type typeDO;
+    public  Class<T> classService;
+    public  Class<D> classDTO;
+    public  Class<O> classDO;
+    public  JavaType typeDTOList;
+    public  JavaType typeDOList;
     public BooleanExpression ownership;
     public DTOAssembler<O, D> dtoAssembler;
     @Autowired
