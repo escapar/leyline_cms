@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import com.k41d.cms.infrastructure.utils.AppUtils;
 import com.k41d.leyline.framework.domain.user.LeylineUser;
 
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
@@ -60,6 +60,6 @@ public class JWTTokenUtils {
     }
 
     public static void setSigningKey(final String signingKey) {
-        JWTTokenUtils.signingKey = new String(Base64.encodeBase64(signingKey.getBytes()));
+        JWTTokenUtils.signingKey = new String(Base64.encode(signingKey.getBytes()));
     }
 }

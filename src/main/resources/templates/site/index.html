@@ -9,10 +9,10 @@
 <body layout:fragment="content">
     <div id="column" th:each="c : ${ct}">
         <h2>
-            <a th:text="${c.getKey().name}" th:href="${'/'+c.getKey().alias}">专栏标题</a>
+            <a th:text="${c.getKey().name}" th:href="${'/static/'+c.getKey().alias}">专栏标题</a>
         </h2>
         <li th:each="t : ${c.getValue()}">
-            <a th:text="${t.name}" th:href="${'/'+c.getKey().alias+'/'+t.id}">文章名</a>
+            <a th:text="${t.name}" th:href="${'/static/'+c.getKey().alias+'/'+t.id}">文章名</a>
         </li>
     </div>
 

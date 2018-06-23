@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/static")
 public class IndexController {
     @Autowired CategoryService categoryService;
     @Autowired TopicService topicService;

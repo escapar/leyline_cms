@@ -17,6 +17,8 @@ import org.springframework.web.context.request.async.DeferredResult;
 import com.fasterxml.classmate.TypeResolver;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import de.codecentric.boot.admin.server.config.EnableAdminServer;
 //
 //import springfox.documentation.builders.PathSelectors;
 //import springfox.documentation.builders.RequestHandlerSelectors;
@@ -38,7 +40,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @EnableAspectJAutoProxy
 @EnableScheduling
 @EnableConfigurationProperties
-
+@EnableAdminServer
 public class CMSApp extends LeylineApp {
     public static void main(String[] args) {
         SpringApplication.run(CMSApp.class, args);

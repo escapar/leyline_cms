@@ -19,12 +19,12 @@ import java.util.Objects;
 public class ScheduledController {
 
 
-    @Scheduled(cron = "0 0 2 * * ?") // cron = 0 0 2 * * ?  fixedRate = 3000
-    @RequestMapping(value = "/springScheduled", method = RequestMethod.POST)
-    public void springScheduled() {
-
-
-    }
+//    @Scheduled(cron = "0 0 2 * * ?") // cron = 0 0 2 * * ?  fixedRate = 3000
+//    @RequestMapping(value = "/springScheduled", method = RequestMethod.POST)
+//    public void springScheduled() {
+//
+//
+//    }
 
 
 
