@@ -76,7 +76,7 @@ public class CorsWebMvsConfig implements WebMvcConfigurer {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true); // you USUALLY want this
-        config.setAllowedOrigins(Arrays.asList("*"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:9999","http://localhost:9527","http://localhost:3000","http://escapar.org","https://escapar.org"));
         config.addAllowedHeader("*");
         config.addAllowedHeader("X-Authorization");
 
