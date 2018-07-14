@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.escapar.cms.business.domain.commons.VersionUtil;
@@ -60,7 +61,12 @@ public class TopicDetail implements Serializable,LeylineDO {
 
     @Column(name="summary")
     private String summary;
-//
+
+    @OneToOne
+    @JoinColumn(name="draft_id")
+    private TopicDetail draft;
+
+    //
 //    @ManyToOne
 //    @JoinColumn(name="topic_id")
 //    private Topic topic;
@@ -88,6 +94,7 @@ public class TopicDetail implements Serializable,LeylineDO {
         this.fillInVersion();
         return mainVersion + '.' + subVersion;
     }
+
 
     public boolean contentEquals(Object o) {
         if (this == o) return true;

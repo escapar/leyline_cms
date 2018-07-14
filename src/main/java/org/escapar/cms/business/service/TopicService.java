@@ -67,18 +67,6 @@ public class TopicService extends LeylineDomainService<TopicRepo,Topic> {
         return repo.save(t);
     }
 
-    public TopicDetail draft(TopicDetail draft,long id) throws PersistenceException {
-        Optional<Topic> op = get(id);
-        if(!op.isPresent()) throw new PersistenceException("Invalid ID");
-
-        Topic t = op.get();
-        if(draft.getId()>0 && !draft.getMainVersion().equals("draft")){
-            draft.setId(0);
-        }
-        draft = topicDetailService.save(draft.setSubVersion("draft").setMainVersion("draft").setCreatedAt(ZonedDateTime.now()));
-        repo.save(t.setDraft(draft));
-        return draft;
-    }
 
     public Topic like(long id,String ip) throws PersistenceException {
         Optional<Topic> op = get(id);

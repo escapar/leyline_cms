@@ -57,6 +57,9 @@ public class User implements Serializable,LeylineUser {
     @Column(name="password")
     private String password;
 
+    @Column(name="avatar")
+    private String avatar;
+
     @Column(name="role")
     private int role;
 
@@ -169,6 +172,15 @@ public class User implements Serializable,LeylineUser {
 
     public User setRole( int role) {
         this.role = role;
+        return this;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public User setAvatar(final String avatar) {
+        this.avatar = avatar;
         return this;
     }
 }

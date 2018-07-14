@@ -46,6 +46,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @EnableSpringDataWebSupport
 @RestController
@@ -126,7 +127,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
 
 
     @SuppressWarnings(value = "unchecked")
-    @JsonView(LeylineView.DETAIL.class)
+    @JsonView(LeylineView.LIST.class)
     @RequestMapping(value = "/query", method = RequestMethod.GET)
     public PageJSON<D> listWithDetail(
             Pageable p, @RequestParam MultiValueMap<String, String> parameters) throws PersistenceException, NoSuchMethodException {

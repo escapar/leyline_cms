@@ -1,6 +1,8 @@
 package org.escapar.cms.business.domain.user;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Data;
 import lombok.Getter;
@@ -12,6 +14,7 @@ import org.escapar.cms.interfaces.view.CMSView;
 import org.escapar.leyline.framework.interfaces.dto.LeylineDTO;
 
 import org.escapar.leyline.framework.interfaces.dto.LeylineDTO;
+import org.springframework.data.annotation.Transient;
 
 @Getter
 @Setter
@@ -38,5 +41,7 @@ public class UserDTO implements LeylineDTO {
     @JsonView(CMSView.LIST.class)
     private int role;
 
-
+    @JsonView(CMSView.LIST.class)
+    @Transient
+    private List<String> roles;
 }

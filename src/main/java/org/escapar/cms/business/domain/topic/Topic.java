@@ -65,10 +65,6 @@ public class Topic implements Serializable,LeylineDO {
     private TopicDetail latest;
 
     @ManyToOne
-    @JoinColumn(name="draft_topic_detail_id")
-    private TopicDetail draft;
-
-    @ManyToOne
     @JoinColumn(name="latest_published_topic_detail_id")
     private TopicDetail latestPublished;
 
