@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -17,7 +16,6 @@ import javax.persistence.Table;
 import org.escapar.cms.business.domain.commons.VersionUtil;
 import org.escapar.leyline.framework.domain.LeylineDO;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,6 +45,9 @@ public class TopicDetail implements Serializable,LeylineDO {
     @Column(name="published_at")
     private ZonedDateTime publishedAt;
 
+    @Column(name="saved_at")
+    private ZonedDateTime savedAt;
+
     @Column(name="published")
     private boolean published;
 
@@ -66,10 +67,6 @@ public class TopicDetail implements Serializable,LeylineDO {
     @JoinColumn(name="draft_id")
     private TopicDetail draft;
 
-    //
-//    @ManyToOne
-//    @JoinColumn(name="topic_id")
-//    private Topic topic;
 
     public TopicDetail fillInVersion(){
         // to ensure we've got version for every instance
@@ -99,7 +96,6 @@ public class TopicDetail implements Serializable,LeylineDO {
     public boolean contentEquals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-//        if (!super.equals(o)) return false;
 
         TopicDetail that = (TopicDetail) o;
 

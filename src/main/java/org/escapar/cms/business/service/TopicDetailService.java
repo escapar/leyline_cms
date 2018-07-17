@@ -1,23 +1,39 @@
 package org.escapar.cms.business.service;
 
-import org.escapar.cms.business.domain.topic.Topic;
+import java.time.ZonedDateTime;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.escapar.cms.business.domain.topic.TopicDetail;
 import org.escapar.cms.business.domain.topic.TopicDetailRepo;
-
-import org.escapar.leyline.framework.infrastructure.common.exceptions.PersistenceException;
-
-import org.escapar.cms.business.domain.topic.TopicDetail;
 import org.escapar.leyline.framework.infrastructure.common.exceptions.PersistenceException;
 import org.escapar.leyline.framework.service.LeylineDomainService;
 import org.springframework.stereotype.Service;
 
-import org.escapar.leyline.framework.service.LeylineDomainService;
-
-import java.time.ZonedDateTime;
-import java.util.Optional;
-
 @Service
 public class TopicDetailService extends LeylineDomainService<TopicDetailRepo,TopicDetail> {
+    @Override
+    public TopicDetail save(TopicDetail entity) throws PersistenceException {
+        try {
+            return repo.save(entity.setSavedAt(ZonedDateTime.now()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new PersistenceException(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<TopicDetail> save(Collection<TopicDetail> entity) throws PersistenceException {
+        try {
+            return (List<TopicDetail>)repo.saveAll(entity.stream().map(e->e.setSavedAt(ZonedDateTime.now())).collect(Collectors.toList()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new PersistenceException(e.getMessage());
+        }
+    }
+
     public TopicDetail publish(TopicDetail persistedTd) throws PersistenceException {
         return repo.save(persistedTd.upgradeMainVersion(persistedTd.fillInVersion().getMainVersion())
                 .setPublished(true)

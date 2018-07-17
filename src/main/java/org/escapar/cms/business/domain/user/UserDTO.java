@@ -1,20 +1,17 @@
 package org.escapar.cms.business.domain.user;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonView;
+
+import org.escapar.cms.interfaces.view.CMSView;
+import org.escapar.leyline.framework.interfaces.dto.LeylineDTO;
+import org.springframework.data.annotation.Transient;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-
-import com.fasterxml.jackson.annotation.JsonView;
-import org.escapar.cms.interfaces.view.CMSView;
-import org.escapar.leyline.framework.interfaces.dto.LeylineDTO;
-
-import org.escapar.leyline.framework.interfaces.dto.LeylineDTO;
-import org.springframework.data.annotation.Transient;
 
 @Getter
 @Setter

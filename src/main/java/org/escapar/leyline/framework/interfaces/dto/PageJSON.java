@@ -1,12 +1,12 @@
 package org.escapar.leyline.framework.interfaces.dto;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import org.escapar.leyline.framework.interfaces.view.LeylineView;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import org.escapar.leyline.framework.interfaces.view.LeylineView;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.List;
 
 /**
  * Created by bytenoob on 6/10/16.

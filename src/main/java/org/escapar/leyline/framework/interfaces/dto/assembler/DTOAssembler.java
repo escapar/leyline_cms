@@ -6,14 +6,11 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.escapar.leyline.framework.domain.LeylineDO;
 import org.escapar.leyline.framework.interfaces.dto.LeylineDTO;
 import org.jodah.typetools.TypeResolver;
 import org.modelmapper.ModelMapper;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.domain.Page;
-
-import org.escapar.leyline.framework.domain.LeylineDO;
-import org.escapar.leyline.framework.interfaces.dto.LeylineDTO;
 
 /**
  * DTO转DO,特别注意的是无参构造仅能用于继承的子类.

@@ -4,17 +4,11 @@ import java.time.ZonedDateTime;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 import org.escapar.cms.infrastructure.utils.AppUtils;
 import org.escapar.leyline.framework.domain.user.LeylineUser;
-
-import org.escapar.leyline.framework.domain.user.LeylineUser;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

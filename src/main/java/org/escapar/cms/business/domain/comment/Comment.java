@@ -13,16 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import org.escapar.cms.business.domain.topic.Topic;
 import org.escapar.cms.business.domain.topic.TopicDetail;
 import org.escapar.cms.business.domain.user.User;
-
 import org.escapar.leyline.framework.domain.LeylineDO;
 
-import org.escapar.cms.business.domain.topic.TopicDetail;
-import org.escapar.cms.business.domain.user.User;
-
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;

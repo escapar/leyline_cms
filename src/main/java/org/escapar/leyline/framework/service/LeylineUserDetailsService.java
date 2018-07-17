@@ -1,8 +1,7 @@
 package org.escapar.leyline.framework.service;
 
-import javaslang.collection.Stream;
-import org.escapar.leyline.framework.domain.user.LeylineUser;
-import org.escapar.leyline.framework.domain.user.LeylineUserRepo;
+import java.util.Collection;
+import java.util.Optional;
 
 import org.escapar.leyline.framework.domain.user.LeylineUser;
 import org.escapar.leyline.framework.domain.user.LeylineUserRepo;
@@ -15,8 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Optional;
+import javaslang.collection.Stream;
 
 /**
  * Created by POJO on 6/8/16.

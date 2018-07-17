@@ -16,16 +16,14 @@ package org.escapar.leyline.framework.infrastructure.configurations;
 //import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 //import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Created by POJO on 6/27/16.

@@ -1,27 +1,25 @@
 package org.escapar.leyline.framework.interfaces.rest;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.escapar.cms.business.domain.category.Category;
-import org.escapar.leyline.framework.interfaces.dto.assembler.DTOAssembler;
-import org.escapar.leyline.framework.interfaces.view.LeylineView;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
+
 import org.escapar.cms.infrastructure.security.ROLE_CONSTS;
 import org.escapar.leyline.framework.domain.LeylineDO;
 import org.escapar.leyline.framework.domain.user.LeylineUser;
 import org.escapar.leyline.framework.infrastructure.common.exceptions.PersistenceException;
 import org.escapar.leyline.framework.interfaces.dto.LeylineDTO;
 import org.escapar.leyline.framework.interfaces.dto.PageJSON;
+import org.escapar.leyline.framework.interfaces.dto.assembler.DTOAssembler;
+import org.escapar.leyline.framework.interfaces.view.LeylineView;
 import org.escapar.leyline.framework.service.LeylineDomainService;
 import org.escapar.leyline.framework.service.LeylineUserDetailsService;
-
-import org.escapar.leyline.framework.domain.user.LeylineUser;
-import org.escapar.leyline.framework.interfaces.dto.LeylineDTO;
-import org.escapar.leyline.framework.interfaces.dto.PageJSON;
-import org.escapar.leyline.framework.interfaces.dto.assembler.DTOAssembler;
-import org.escapar.leyline.framework.service.LeylineDomainService;
 import org.jodah.typetools.TypeResolver;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -38,69 +36,79 @@ import org.springframework.data.querydsl.binding.QuerydslBindingsFactory;
 import org.springframework.data.querydsl.binding.QuerydslPredicateBuilder;
 import org.springframework.data.util.ClassTypeInformation;
 import org.springframework.data.util.TypeInformation;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @EnableSpringDataWebSupport
 @RestController
-public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O extends LeylineDO, D extends LeylineDTO> {
-    public static  QuerydslBindingsFactory bindingsFactory = new QuerydslBindingsFactory(SimpleEntityPathResolver.INSTANCE);
-    public static  QuerydslPredicateBuilder predicateBuilder = new QuerydslPredicateBuilder(new DefaultConversionService(), bindingsFactory.getEntityPathResolver());
-    public  Logger logger = LoggerFactory.getLogger(getClass());
-    public  Class<?>[] typeArgs;
-    public  Type typeService;
-    public  Type typeDTO;
-    public  Type typeDO;
-    public  Class<T> classService;
-    public  Class<D> classDTO;
-    public  Class<O> classDO;
-    public  JavaType typeDTOList;
-    public  JavaType typeDOList;
-    public BooleanExpression ownership;
-    public DTOAssembler<O, D> dtoAssembler;
-    @Autowired
-    protected T service;
-    @Autowired
-    protected LeylineUserDetailsService userDetailsService;
-    private ObjectMapper mapper = new ObjectMapper();
+public abstract class LeylineReadonlyRestCRUD<Service extends LeylineDomainService, Domain extends LeylineDO, DTO extends LeylineDTO> {
+    private static final QuerydslBindingsFactory bindingsFactory = new QuerydslBindingsFactory(SimpleEntityPathResolver.INSTANCE);
+    private static final QuerydslPredicateBuilder predicateBuilder = new QuerydslPredicateBuilder(new DefaultConversionService(), bindingsFactory.getEntityPathResolver());
+    private Logger logger = LoggerFactory.getLogger(getClass());
+    private static Class<?>[] typeArgs;
+    private static Type typeService;
+    private static Type typeDTO;
+    private static Type typeDO;
+    private Class<Service> classService;
+    private Class<DTO> classDTO;
+    private Class<Domain> classDO;
+    private static JavaType typeDTOList;
+    private static JavaType typeDOList;
+    private static BooleanExpression ownership;
+    private DTOAssembler<Domain, DTO> dtoAssembler;
+    @Autowired private Service service;
+    @Autowired private LeylineUserDetailsService userDetailsService;
+    private static ObjectMapper mapper = new ObjectMapper();
+
 
     @SuppressWarnings(value = "unchecked")
     public LeylineReadonlyRestCRUD() {
         typeArgs = TypeResolver.resolveRawArguments(LeylineReadonlyRestCRUD.class, getClass());
-        classService = (Class<T>) typeArgs[0];
-        classDTO = (Class<D>) typeArgs[2];
-        classDO = (Class<O>) typeArgs[1];
-        this.typeService = TypeToken.of(classService).getType();
-        this.typeDTO = TypeToken.of(classDTO).getType();
-        this.typeDO = TypeToken.of(classDO).getType();
+        classService = (Class<Service>) typeArgs[0];
+        classDTO = (Class<DTO>) typeArgs[2];
+        classDO = (Class<Domain>) typeArgs[1];
+        typeService = TypeToken.of(classService).getType();
+        typeDTO = TypeToken.of(classDTO).getType();
+        typeDO = TypeToken.of(classDO).getType();
         typeDTOList = mapper.getTypeFactory().constructCollectionType(List.class, classDTO);
         typeDOList = mapper.getTypeFactory().constructCollectionType(List.class, classDO);
         setDTOAssembler(new DTOAssembler<>(typeDO, typeDTO));
     }
 
-    public Page doQueryDSL(Pageable p, MultiValueMap<String, String> parameters) throws PersistenceException {
+    private Page doQueryDSL(Pageable p, MultiValueMap<String, String> parameters) throws PersistenceException {
         Page res = service.findAll(buildPredicate(parameters), p);
         return dtoAssembler.buildPageDTO(res);
     }
 
 
-    public Predicate buildPredicate(MultiValueMap<String, String> parameters){
-        TypeInformation<O> domainType = ClassTypeInformation.from(classDO);
+    private Predicate buildPredicate(MultiValueMap<String, String> parameters){
+        TypeInformation<Domain> domainType = ClassTypeInformation.from(classDO);
         QuerydslBindings bindings = bindingsFactory.createBindingsFor(domainType);
+        appendBindings(bindings);
 
         Predicate predicate = predicateBuilder.getPredicate(domainType, parameters, bindings);
+        appendPredicate(predicate);
+
+        return predicate;
+    }
+
+    public void appendBindings(QuerydslBindings bindings){
+
+    }
+
+    public void appendPredicate(Predicate predicate){
         if (getOwnership() != null) {
             predicate = getOwnership().and(predicate);
         }
-
-        return predicate;
     }
 
 
@@ -108,7 +116,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     @JsonView(LeylineView.LIST.class)
     @ResponseBody
     @SuppressWarnings(value = "unchecked")
-    public PageJSON<D> list(Pageable p) throws PersistenceException {
+    public PageJSON<DTO> list(@PageableDefault(page = 0, size = 99) Pageable p) throws PersistenceException {
         checkQuery(p);
         Page res = service.findAll(p);
         res = dtoAssembler.buildPageDTO(res);
@@ -119,7 +127,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     @SuppressWarnings(value = "unchecked")
     @JsonView(LeylineView.LIST.class)
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public PageJSON<D> listWithQuery(
+    public PageJSON<DTO> listWithQuery(
             Pageable p, @RequestParam MultiValueMap<String, String> parameters) throws PersistenceException, NoSuchMethodException {
         checkQuery(parameters);
         return new PageJSON<>(doQueryDSL(p, parameters), p);
@@ -129,7 +137,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     @SuppressWarnings(value = "unchecked")
     @JsonView(LeylineView.LIST.class)
     @RequestMapping(value = "/query", method = RequestMethod.GET)
-    public PageJSON<D> listWithDetail(
+    public PageJSON<DTO> listWithDetail(
             Pageable p, @RequestParam MultiValueMap<String, String> parameters) throws PersistenceException, NoSuchMethodException {
         checkQuery(parameters);
         return new PageJSON<>(doQueryDSL(p, parameters), p);
@@ -140,11 +148,11 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     @JsonView(LeylineView.DETAIL.class)
     @ResponseBody
     @SuppressWarnings(value = "unchecked")
-    public D find(@PathVariable Long id,@RequestParam MultiValueMap<String, String> parameters) throws PersistenceException {
+    public DTO find(@PathVariable Long id,@RequestParam MultiValueMap<String, String> parameters) throws PersistenceException {
         checkQuery(id);
         parameters.add("id",id.toString());
         Predicate p = buildPredicate(parameters);
-        return dtoAssembler.buildDTO((O) service.findOne(p).orElse(null));
+        return dtoAssembler.buildDTO((Domain) service.findOne(p).orElse(null));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -152,8 +160,8 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     @RequestMapping(value = "/batch", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     @SuppressWarnings(value = "unchecked")
-    public List<D> update(@RequestBody String json) throws IOException, PersistenceException {
-        List<O> doList = dtoAssembler.buildDOList(mapper.readValue(json, typeDTOList));
+    public List<DTO> update(@RequestBody String json) throws IOException, PersistenceException {
+        List<Domain> doList = dtoAssembler.buildDOList(mapper.readValue(json, typeDTOList));
         checkUpdateBatch(doList);
         return dtoAssembler.buildDTOList(service.save(doList));
     }
@@ -163,10 +171,10 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     @ResponseBody
     @SuppressWarnings(value = "unchecked")
-    public D updateOne(@RequestBody D obj) throws IOException, PersistenceException {
-        O objDO = dtoAssembler.buildDO(obj);
+    public DTO updateOne(@RequestBody DTO obj) throws IOException, PersistenceException {
+        Domain objDO = dtoAssembler.buildDO(obj);
         checkUpdate(objDO);
-        return dtoAssembler.buildDTO((O)service.save(objDO));
+        return dtoAssembler.buildDTO((Domain)service.save(objDO));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -174,7 +182,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     @RequestMapping(value = "/batch", method = RequestMethod.PUT, produces = "application/json")
     @ResponseBody
     @SuppressWarnings(value = "unchecked")
-    public List<D> insert(@RequestBody String json) throws IOException, PersistenceException {
+    public List<DTO> insert(@RequestBody String json) throws IOException, PersistenceException {
         return update(json);
     }
 
@@ -183,8 +191,8 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
     @RequestMapping(value = "", method = RequestMethod.PUT, produces = "application/json")
     @ResponseBody
     @SuppressWarnings(value = "unchecked")
-    public D insertOne(@RequestBody D obj) throws PersistenceException {
-        O objDO = dtoAssembler.buildDO(obj);
+    public DTO insertOne(@RequestBody DTO obj) throws PersistenceException {
+        Domain objDO = dtoAssembler.buildDO(obj);
         checkUpdate(objDO);
         ModelMapper mm = new ModelMapper();
         mm.getConfiguration().setSourceNameTokenizer(NameTokenizers.UNDERSCORE).setAmbiguityIgnored(true);
@@ -229,7 +237,7 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
         return getCurrentUser() != null && getCurrentUser().getRole() == ROLE_CONSTS.ADMIN.val;
     }
 
-    public void setDTOAssembler(DTOAssembler<O, D> dtoAssembler) {
+    public void setDTOAssembler(DTOAssembler<Domain, DTO> dtoAssembler) {
         this.dtoAssembler = dtoAssembler;
     }
 
@@ -243,11 +251,11 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
 
     }
 
-    public void checkUpdateBatch(List<O> o) {
+    public void checkUpdateBatch(List<Domain> o) {
         o.forEach(this::checkUpdate);
     }
 
-    public void checkUpdate(O o) {
+    public void checkUpdate(Domain o) {
 
     }
 
@@ -259,5 +267,27 @@ public abstract class LeylineReadonlyRestCRUD<T extends LeylineDomainService, O 
         return ownership;
     }
 
+    public Service getService() {
+        return service;
+    }
 
+    public LeylineUserDetailsService getUserDetailsService() {
+        return userDetailsService;
+    }
+
+    public DTOAssembler<Domain, DTO> getDtoAssembler() {
+        return dtoAssembler;
+    }
+
+    public void setDtoAssembler(final DTOAssembler<Domain, DTO> dtoAssembler) {
+        this.dtoAssembler = dtoAssembler;
+    }
+
+    public static QuerydslBindingsFactory getBindingsFactory() {
+        return bindingsFactory;
+    }
+
+    public static QuerydslPredicateBuilder getPredicateBuilder() {
+        return predicateBuilder;
+    }
 }

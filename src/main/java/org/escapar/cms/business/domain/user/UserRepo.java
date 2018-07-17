@@ -1,10 +1,7 @@
 package org.escapar.cms.business.domain.user;
 
-
 import org.escapar.leyline.framework.domain.user.LeylineUserRepo;
 import org.springframework.stereotype.Repository;
-
-import org.escapar.leyline.framework.domain.user.LeylineUserRepo;
 
 @Repository
 public interface UserRepo extends LeylineUserRepo<User> {

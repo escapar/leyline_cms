@@ -13,18 +13,14 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import org.escapar.cms.infrastructure.security.ROLE_CONSTS;
 
+import org.escapar.cms.infrastructure.security.ROLE_CONSTS;
 import org.escapar.leyline.framework.domain.user.LeylineUser;
 import org.escapar.leyline.framework.interfaces.view.LeylineView;
 import org.springframework.data.annotation.Transient;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import org.escapar.leyline.framework.domain.user.LeylineUser;
-import org.escapar.leyline.framework.interfaces.view.LeylineView;
-
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;

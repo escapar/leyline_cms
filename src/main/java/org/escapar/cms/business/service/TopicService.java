@@ -1,33 +1,23 @@
 package org.escapar.cms.business.service;
 
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.escapar.cms.business.domain.category.Category;
-import org.escapar.cms.business.domain.commons.VersionUtil;
-import org.escapar.cms.business.domain.topic.*;
 import org.escapar.cms.business.domain.tag.Tag;
-
-import org.escapar.cms.business.domain.user.User;
-import org.escapar.leyline.framework.infrastructure.common.exceptions.PersistenceException;
-
-import org.escapar.cms.business.domain.category.Category;
 import org.escapar.cms.business.domain.topic.Topic;
 import org.escapar.cms.business.domain.topic.TopicDetail;
 import org.escapar.cms.business.domain.topic.TopicLike;
 import org.escapar.cms.business.domain.topic.TopicLikeRepo;
+import org.escapar.cms.business.domain.topic.TopicRepo;
 import org.escapar.cms.business.domain.user.User;
 import org.escapar.leyline.framework.infrastructure.common.exceptions.PersistenceException;
 import org.escapar.leyline.framework.service.LeylineDomainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import org.escapar.leyline.framework.service.LeylineDomainService;
-
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static org.escapar.cms.infrastructure.utils.AppUtils.unchecked;
 

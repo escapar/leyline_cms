@@ -21,14 +21,11 @@ import javax.persistence.Table;
 
 import org.escapar.cms.business.domain.category.Category;
 import org.escapar.cms.business.domain.comment.Comment;
-
-
 import org.escapar.cms.business.domain.tag.Tag;
 import org.escapar.leyline.framework.domain.LeylineDO;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
-import org.escapar.cms.business.domain.tag.Tag;
-
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -62,10 +59,13 @@ public class Topic implements Serializable,LeylineDO {
 
     @ManyToOne
     @JoinColumn(name="latest_topic_detail_id")
+    @NotFound(action=NotFoundAction.IGNORE)
     private TopicDetail latest;
+
 
     @ManyToOne
     @JoinColumn(name="latest_published_topic_detail_id")
+    @NotFound(action=NotFoundAction.IGNORE)
     private TopicDetail latestPublished;
 
     @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
@@ -74,6 +74,7 @@ public class Topic implements Serializable,LeylineDO {
 
     @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     @JoinColumn(name="topic_id")
+    @NotFound(action=NotFoundAction.IGNORE)
     private List<TopicDetail> versions;
 
     @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)

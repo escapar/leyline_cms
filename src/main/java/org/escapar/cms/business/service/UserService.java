@@ -4,8 +4,6 @@ import java.util.Collection;
 
 import org.escapar.cms.business.domain.user.User;
 import org.escapar.cms.business.domain.user.UserRepo;
-
-import org.escapar.cms.business.domain.user.User;
 import org.escapar.cms.infrastructure.security.JWTTokenUtils;
 import org.escapar.leyline.framework.service.LeylineUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +13,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import io.jsonwebtoken.Claims;
-
-import org.escapar.leyline.framework.service.LeylineUserDetailsService;
 
 @Service
 public class UserService extends LeylineUserDetailsService<UserRepo,User> {

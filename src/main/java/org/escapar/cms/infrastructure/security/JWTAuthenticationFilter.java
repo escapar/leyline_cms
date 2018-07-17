@@ -5,11 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.escapar.cms.business.domain.user.User;
 import org.escapar.cms.business.service.UserService;
-
-import org.escapar.leyline.framework.infrastructure.configurations.StatelessAuthenticationFilter;
-
-import org.escapar.cms.business.domain.user.User;
-import org.escapar.cms.business.service.UserService;
 import org.escapar.leyline.framework.infrastructure.configurations.StatelessAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

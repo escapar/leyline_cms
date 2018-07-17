@@ -1,13 +1,19 @@
 package org.escapar.leyline.framework.service;
 
-import org.escapar.cms.business.domain.user.User;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import com.querydsl.core.types.Predicate;
+
+import org.escapar.cms.business.domain.user.User;
 import org.escapar.leyline.framework.domain.LeylineDO;
 import org.escapar.leyline.framework.domain.LeylineRepo;
 import org.escapar.leyline.framework.domain.user.LeylineUser;
 import org.escapar.leyline.framework.infrastructure.common.exceptions.PersistenceException;
-
-import org.escapar.leyline.framework.domain.LeylineRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,8 +22,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.*;
 
 /**
  * Created by POJO on 5/29/16.

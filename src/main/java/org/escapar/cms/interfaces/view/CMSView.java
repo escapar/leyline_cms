@@ -2,8 +2,6 @@ package org.escapar.cms.interfaces.view;
 
 import org.escapar.leyline.framework.interfaces.view.LeylineView;
 
-import org.escapar.leyline.framework.interfaces.view.LeylineView;
-
 /**
  * Created by bytenoob on 5/29/16.
  */

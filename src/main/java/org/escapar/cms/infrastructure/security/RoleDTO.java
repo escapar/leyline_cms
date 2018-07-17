@@ -3,12 +3,10 @@ package org.escapar.cms.infrastructure.security;
 import java.util.Arrays;
 import java.util.List;
 
-import lombok.Data;
 import org.escapar.leyline.framework.domain.user.LeylineUser;
 import org.escapar.leyline.framework.interfaces.dto.LeylineDTO;
 
-import org.escapar.leyline.framework.domain.user.LeylineUser;
-import org.escapar.leyline.framework.interfaces.dto.LeylineDTO;
+import lombok.Data;
 
 @Data public class RoleDTO implements LeylineDTO {
     private String username;

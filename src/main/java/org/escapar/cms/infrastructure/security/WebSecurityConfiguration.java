@@ -1,9 +1,6 @@
 package org.escapar.cms.infrastructure.security;
 
-
 import org.escapar.cms.business.service.UserService;
-import org.escapar.leyline.framework.infrastructure.configurations.LeylineWebSecurityConfiguration;
-
 import org.escapar.leyline.framework.infrastructure.configurations.LeylineWebSecurityConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

@@ -10,18 +10,11 @@ import org.escapar.cms.business.domain.topic.Topic;
 import org.escapar.cms.business.service.CategoryService;
 import org.escapar.cms.business.service.TopicService;
 import org.escapar.leyline.framework.infrastructure.common.exceptions.PersistenceException;
-
-import org.escapar.cms.business.domain.category.Category;
-import org.escapar.cms.business.domain.topic.Topic;
-import org.escapar.cms.business.service.CategoryService;
-import org.escapar.cms.business.service.TopicService;
-import org.escapar.leyline.framework.infrastructure.common.exceptions.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/static")
