@@ -11,5 +11,5 @@ public interface TopicRepo extends LeylineRepo<Topic> {
     List<Topic> findByNameLike(String name);
     List<Topic> findByCategoryOrderByCreatedAtDesc(Category c);
     List<Topic> findTop5ByCategoryOrderByCreatedAtDesc(Category c);
-    List<Topic> findTop3ByOrderByCreatedAtDesc();
+    List<Topic> findTop3ByFeaturedIsTrueAndLatestPublishedIsNotNullOrderByCreatedAtDesc();
 }

@@ -17,7 +17,7 @@ public class TopicDetailService extends LeylineDomainService<TopicDetailRepo,Top
     @Override
     public TopicDetail save(TopicDetail entity) throws PersistenceException {
         try {
-            return repo.save(entity.setSavedAt(ZonedDateTime.now()));
+            return getRepo().save(entity.setSavedAt(ZonedDateTime.now()));
         } catch (Exception e) {
             e.printStackTrace();
             throw new PersistenceException(e.getMessage());
@@ -27,7 +27,7 @@ public class TopicDetailService extends LeylineDomainService<TopicDetailRepo,Top
     @Override
     public List<TopicDetail> save(Collection<TopicDetail> entity) throws PersistenceException {
         try {
-            return (List<TopicDetail>)repo.saveAll(entity.stream().map(e->e.setSavedAt(ZonedDateTime.now())).collect(Collectors.toList()));
+            return (List<TopicDetail>)getRepo().saveAll(entity.stream().map(e->e.setSavedAt(ZonedDateTime.now())).collect(Collectors.toList()));
         } catch (Exception e) {
             e.printStackTrace();
             throw new PersistenceException(e.getMessage());
@@ -35,7 +35,7 @@ public class TopicDetailService extends LeylineDomainService<TopicDetailRepo,Top
     }
 
     public TopicDetail publish(TopicDetail persistedTd) throws PersistenceException {
-        return repo.save(persistedTd.upgradeMainVersion(persistedTd.fillInVersion().getMainVersion())
+        return getRepo().save(persistedTd.upgradeMainVersion(persistedTd.fillInVersion().getMainVersion())
                 .setPublished(true)
                 .setPublishedAt(ZonedDateTime.now()));
     }
@@ -49,7 +49,7 @@ public class TopicDetailService extends LeylineDomainService<TopicDetailRepo,Top
             draft.setId(0);
         }
         draft = save(draft.setSubVersion("draft").setMainVersion("draft").setCreatedAt(ZonedDateTime.now()));
-        repo.save(t.setDraft(draft));
+        getRepo().save(t.setDraft(draft));
         return draft;
     }
 }

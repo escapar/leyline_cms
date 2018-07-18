@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
     <title> - escapar!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" th:href="@{/assets/css/sakura.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/assets/css/siimple.min.css}" type="text/css">
 </head>
 
 <body>
-<header layout:replace="site/layouts/header"></header>
+<header layout:replace="~{site/layouts/header.html :: nav}"></header>
 <div layout:fragment="content"></div>
-<footer layout:replace="site/layouts/footer"></footer>
+<footer layout:replace="~{site/layouts/footer.html :: copy}"></footer>
 </body>
 
 </html>

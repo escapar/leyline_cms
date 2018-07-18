@@ -1,17 +1,41 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" view="topics" layout:decorator="site/layouts/default">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{site/layouts/default.html}">
 <head>
     <title th:text="${t.name}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" th:href="@{/assets/css/sakura.min.css}" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <script th:src="@{/assets/js/marked.min.js}"></script>
     <script th:src="@{/assets/js/markdown-attr.min.js}"></script>
 
 </head>
-<body layout:fragment="content">
-    <h2 th:text="${t.latest.title}">标题</h2>
-    <div id="content"></div>
+<body sd-main siimple-content--large layout:fragment="content">
+    <div class="siimple-jumbotron sd-header siimple-jumbotron--large">
+        <div class="siimple-jumbotron-title"  th:text="${t.latestPublished.title}">Welcome to the mirror of escapar.org</div>
+        <div class="siimple-jumbotron-subtitle" th:if="${t.latestPublished.publishedAt!=null && t.latestPublished.mainVersion!=null}" th:text="${'第'+t.latestPublished.mainVersion+'版 '+#dates.format(t.latestPublished.publishedAt.toInstant(), 'yyyy-MM-dd HH:mm')}">This is a CMS Demo.</div>
+        <div class="siimple-jumbotron-detail" th:text="${#strings.arrayJoin(t.tags,', ')}">And all pages are back-end generated.</div>
+    </div>
+    <div class="sd-main siimple-content--large">
+        <div  id="content" th:text="${t.latestPublished.content}"></div>
+        <!--<div class="siimple-grid-row">-->
+        <!--<div class="siimple-grid-col siimple-grid-col&#45;&#45;3 siimple-grid-col-sm&#45;&#45;12 sd-column">-->
+            <!--<div class="sd-menu">-->
+                <!--<div class="siimple-menu-group sd-menu-title">TOC</div>-->
 
-    <script th:inline="javascript">var c = /*[[${t.latest.content}]]*/ '#mark';document.getElementById('content').innerHTML = markdown_attr.parse(marked(c));</script>
+
+                <!--<a class="siimple-menu-item sd-menu-item sd-menu&#45;&#45;selected" href="../getting-started/installation.html">-->
+                    <!--Installation-->
+                <!--</a>-->
+
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div  class="siimple-grid-col siimple-grid-col&#45;&#45;9 siimple-grid-col-sm&#45;&#45;12 sd-column" id="content"></div>-->
+    <!--</div>-->
+    </div>
+    <script>document.getElementById('content').innerHTML = markdown_attr.parse(marked(document.getElementById('content').textContent));</script>
 </body>
 </html>

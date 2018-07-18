@@ -17,9 +17,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 
 @EnableSpringDataWebSupport
 @EnableConfigurationProperties
-
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-
 @SpringBootApplication(exclude = {
         RepositoryRestMvcAutoConfiguration.class,
         JmxAutoConfiguration.class,

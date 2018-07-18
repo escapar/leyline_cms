@@ -4,8 +4,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.escapar.cms.business.domain.category.Category;
+import org.escapar.cms.business.domain.commons.CategoryType;
+import org.escapar.cms.business.domain.tag.Tag;
 import org.escapar.cms.business.domain.topic.Topic;
 import org.escapar.cms.business.service.CategoryService;
 import org.escapar.cms.business.service.TopicService;
@@ -17,7 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/static")
+@RequestMapping("/")
 public class IndexController {
     @Autowired CategoryService categoryService;
     @Autowired TopicService topicService;
@@ -25,44 +28,56 @@ public class IndexController {
     @RequestMapping("/")
     public String index(Model model) throws PersistenceException {
         addMenuCategories(model);
-        List<Category> categories = categoryService.findAll();
-        Map<Category,List<Topic>> ct = new LinkedHashMap<>();
-        categories.stream().filter(c->c.getReference() == null).forEach(i->ct.put(i,topicService.findLatestByCategory(i)));
-        model.addAttribute("ct", ct);
+        model.addAttribute("latest", topicService.findLatest3Featured());
         return "site/index";
     }
 
-    @RequestMapping("/{catName}")
+    @RequestMapping("/category/{catName}")
     public String cat(Model model,@PathVariable(value="catName")  String catName) throws PersistenceException {
         addMenuCategories(model);
         Category c = categoryService.findOneByAlias(catName);
         if(c != null){
             model.addAttribute("c",c);
-            List<Topic> topics = topicService.findByCategory(c);
-            if(topics.size()>1) {
-                model.addAttribute("topics", topicService.findByCategory(c));
+            List<Topic> topics = topicService.findByCategory(c).stream().filter(i->i.getLatest()!=null).collect(Collectors.toList());
+            if(c.getType()!=CategoryType.STATIC) {
+                model.addAttribute("topics", topics);
                 return "site/categories/list";
             }else{
-                return topic(model, c.getName(),Long.valueOf(c.getReference()));
+                if(c.getReference() == null){
+                    return "404";
+                }
+                return topic(model,c.getReference());
             }
 
         }
         return "404";
     }
 
-    @RequestMapping("/{catName}/{topicId}")
-    public String topic(Model model,@PathVariable(value="catName")  String catName,@PathVariable(value="topicId")  Long topicId) throws PersistenceException {
+    @RequestMapping("/topic/{topicId}")
+    public String topic(Model model, @PathVariable(value="topicId")  String topicId) throws PersistenceException {
         addMenuCategories(model);
-        Optional<Topic> t = topicService.findById(topicId);
-        if(t.isPresent()){
-            model.addAttribute("t",t.get());
+        List<Topic> tList = topicService.findByNameLike(topicId);
+        if(tList.size() < 1) {
+            Optional<Topic> tOpt = topicService.findById(Long.valueOf(topicId));
+            if(tOpt.isPresent()) {
+                model.addAttribute("t", tOpt.get());
+                return "site/topics/detail";
+            }
+        }else{
+            model.addAttribute("t", tList.get(0));
             return "site/topics/detail";
         }
         return "404";
     }
 
-    public void addMenuCategories(Model m){
-        m.addAttribute("menuCategories",categoryService.findStaticCategories());
+    public void addMenuCategories(Model m) throws PersistenceException {
+        m.addAttribute("menuCategories",categoryService.findNonStaticCategories());
+    }
+
+    public String tagsToString(List<Tag> tags) {
+        if(tags == null || tags.size() < 1) return "";
+        Optional<String> opt = tags.stream().map(Tag::getName).reduce((a,b)->a+" "+b);
+        return opt.orElse("");
     }
 
 }

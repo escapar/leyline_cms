@@ -1,14 +1,38 @@
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <html>
-    <header id="site-header">
-        <h1 id="logo" align="center"><a href="/static/">escapar</a></h1>
-        <div id="static-cat" align="center">
-                <span th:each="c : ${menuCategories}">
-                    <a th:text="${c.name}" th:href="${'/static/'+c.alias}">静态页专栏名</a>
-                    <span> | </span>
-                </span>
-            <span><a href="https://weibo.com/pojorz">Weibo</a><span> | </span></span>
-            <span><a href="https://twitter.com/escapar2000">Twitter</a></span>
+        <div layout:fragment="nav" class="siimple-navbar siimple-navbar--primary sd-navbar siimple-navbar--extra-large" align="center">
+            <div class="siimple--float-left">
+                <a class="siimple-navbar-title" href="/">escapar</a>
+                <!--<a class="siimple-navbar-subtitle">org</a>-->
+                <a th:each="c : ${menuCategories}" class="siimple-navbar-item" th:text="${c.name}" th:href="${'/category/'+c.alias}">静态页专栏名</a>
+
+            </div>
+            <!--<a th:each="c : ${menuCategories}" class="siimple-navbar-title" th:text="${c.name}" th:href="${'/web/'+c.alias}">静态页专栏名</a>-->
+            <div class="siimple--float-right">
+                <div class="siimple-grid-row">
+
+                    <div class="siimple--display-xs-none siimple--d-sm-none">
+                        <a class="sd-navbar-social" style="background-image:url('/assets/images/social/twitter.png');" href="https://twitter.com/escapar2000" target="_blank"></a>
+                        <a class="sd-navbar-social" style="background-image:url('/assets/images/social/github.png');" href="https://github.com/POJOa/leyline_cms" target="_blank"></a>
+                        <a class="sd-navbar-social" style="background-image:url('/assets/images/social/weibo.png');" href="https://weibo.com/678687590" target="_blank"></a>
+                        <div class="popover__wrapper">
+                            <a class="sd-navbar-social" style="background-image:url('/assets/images/social/wechat.png');" href="https://github.com/POJOa/leyline_cms" target="_blank"></a>
+                            <div class="push popover__content" style="background-image:url('/assets/images/social/qrcode.png');width:129px;height:129px"></div>
+                        </div>
+                    </div>
+
+                    <div class="siimple--display-xs-block siimple--display-md-none siimple--display-xl-none siimple--display-titan-none siimple--display-lg-none">
+                        <div class="popover__wrapper">
+                            <a class="sd-navbar-social" style="background-image:url('/assets/images/social/wechat.png');padding-left:0px;margin-left:0px;"></a>
+                            <div class="push popover__content" style="background-image:url('/assets/images/social/qrcode.png');width:129px;height:129px"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
-    </header>
 </html>

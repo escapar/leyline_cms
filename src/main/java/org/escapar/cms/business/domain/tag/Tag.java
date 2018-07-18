@@ -33,4 +33,7 @@ public class Tag implements Serializable,LeylineDO {
     @Column(name="created_at")
     private ZonedDateTime createdAt;
 
+    @Override public String toString() {
+        return name;
+    }
 }

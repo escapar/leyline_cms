@@ -20,27 +20,26 @@ import javaslang.collection.Stream;
  * Created by POJO on 6/8/16.
  */
 @Service
-public abstract class LeylineUserDetailsService<T extends LeylineUserRepo, D extends LeylineUser>  extends LeylineDomainService<T,D> implements UserDetailsService {
+public abstract class LeylineUserDetailsService<Repo extends LeylineUserRepo, User extends LeylineUser>  extends LeylineDomainService<Repo, User> implements UserDetailsService {
 
-    @Autowired
-    private T userRepo;
+    @Autowired private Repo userRepo;
 
     @SuppressWarnings(value = "unchecked")
     @Override
-    public D loadUserByUsername(String username) throws
+    public User loadUserByUsername(String username) throws
             UsernameNotFoundException {
-        D user = (D) userRepo.findByUsernameEquals(username);
+        User user = (User) userRepo.findByUsernameEquals(username);
         if (user == null) {
             throw new UsernameNotFoundException("Username " + username + " not found");
         }
         return user;
     }
 
-    public String getPassword(D user) {
+    public String getPassword(User user) {
         return user.getPassword();
     }
 
-    public Collection<? extends GrantedAuthority> getRole(D user) {
+    public Collection<? extends GrantedAuthority> getRole(User user) {
         return Stream.of(new SimpleGrantedAuthority("ROLE_USER")).toJavaList();
     }
 
@@ -60,7 +59,7 @@ public abstract class LeylineUserDetailsService<T extends LeylineUserRepo, D ext
         return getCurrentUser() != null && getCurrentUser().getId() == (user.getId());
     }
 
-    public Optional<D> get(Long id) {
+    public Optional<User> get(Long id) {
         return userRepo.findById(id);
     }
 }

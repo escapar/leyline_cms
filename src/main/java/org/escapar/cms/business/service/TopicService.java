@@ -32,17 +32,17 @@ public class TopicService extends LeylineDomainService<TopicRepo,Topic> {
     TopicLikeRepo topicLikeRepo;
 
     public List<Topic> findByCategory(Category c){
-        return repo.findByCategoryOrderByCreatedAtDesc(c);
+        return getRepo().findByCategoryOrderByCreatedAtDesc(c);
     }
     public List<Topic> findLatestByCategory(Category c){
-        return repo.findTop5ByCategoryOrderByCreatedAtDesc(c);
+        return getRepo().findTop5ByCategoryOrderByCreatedAtDesc(c);
     }
-    public List<Topic> findLatest3(){
-        return repo.findTop3ByOrderByCreatedAtDesc();
+    public List<Topic> findLatest3Featured(){
+        return getRepo().findTop3ByFeaturedIsTrueAndLatestPublishedIsNotNullOrderByCreatedAtDesc();
     }
 
     public List<Topic> findByNameLike(String name){
-        return repo.findByNameLike("%"+name+"%");
+        return getRepo().findByNameLike(name);
     }
     public Topic publish(long id) throws PersistenceException {
         Optional<Topic> op = get(id);
@@ -54,7 +54,7 @@ public class TopicService extends LeylineDomainService<TopicRepo,Topic> {
         TopicDetail latest = topicDetailService.publish(t.getLatest());
         t.setLatestPublished(latest);
 
-        return repo.save(t);
+        return getRepo().save(t);
     }
 
 
@@ -69,7 +69,7 @@ public class TopicService extends LeylineDomainService<TopicRepo,Topic> {
         likes.addAll(t.getLikes());
         likes.add(tl);
         t.setLikes(likes);
-        return repo.save(t);
+        return getRepo().save(t);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class TopicService extends LeylineDomainService<TopicRepo,Topic> {
             if(entity.getId()>0) {
                 // it's an update operation
                 // reset tags
-                Optional<Topic> persisted = repo.findById(entity.getId());
+                Optional<Topic> persisted = getRepo().findById(entity.getId());
                 if(persisted.isPresent()) {
 
                     TopicDetail persistedLatest = persisted.get().getLatest();
@@ -106,7 +106,7 @@ public class TopicService extends LeylineDomainService<TopicRepo,Topic> {
                 latest = topicDetailService.save(latest);
                 entity.addNewVersion(latest).setCreatedAt(ZonedDateTime.now());
             }
-            return repo.save(entity);
+            return getRepo().save(entity);
 
         } catch (Exception e) {
             e.printStackTrace();

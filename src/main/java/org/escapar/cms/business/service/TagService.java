@@ -22,14 +22,14 @@ public class TagService extends LeylineDomainService<TagRepo,Tag> {
 
         if(tags == null) return new ArrayList<>();
         // convert tags to Map(Key,Tag)
-        Map<String,Tag> everyOne = ((ArrayList<Tag>)repo.findAll()).stream().collect(Collectors.toMap(Tag::getName,
+        Map<String,Tag> everyOne = ((ArrayList<Tag>)getRepo().findAll()).stream().collect(Collectors.toMap(Tag::getName,
                 Function.identity()));
 
         // tag names must be unique , replace existing ones with persisted objects
         List res = tags.stream().map(i-> everyOne.getOrDefault(i.getName(), i)).collect(Collectors.toList());
 
         try {
-            return (List<Tag>) repo.saveAll(res);
+            return (List<Tag>) getRepo().saveAll(res);
         } catch (Exception e) {
             e.printStackTrace();
             throw new PersistenceException(e.getMessage());
@@ -39,17 +39,17 @@ public class TagService extends LeylineDomainService<TagRepo,Tag> {
     @Override
     public Tag save(Tag entity) throws PersistenceException {
         // convert tags to Map(Key,Tag)
-        Map<String,Tag> everyOne = ((ArrayList<Tag>)repo.findAll()).stream().collect(Collectors.toMap(Tag::getName,
+        Map<String,Tag> everyOne = ((ArrayList<Tag>)getRepo().findAll()).stream().collect(Collectors.toMap(Tag::getName,
                 Function.identity()));
         try {
             // tag names must be unique , replace existed one with persisted objects
             if(everyOne.containsKey(entity.getName())){
                 Tag e = everyOne.get(entity.getName());
-                if(entity.getCreatedAt() == null) return repo.save(e.setCreatedAt(ZonedDateTime.now()));
+                if(entity.getCreatedAt() == null) return getRepo().save(e.setCreatedAt(ZonedDateTime.now()));
                 return e;
             }else{
                 if(entity.getCreatedAt() == null) entity.setCreatedAt(ZonedDateTime.now());
-                return repo.save(entity);
+                return getRepo().save(entity);
             }
         } catch (Exception e) {
             e.printStackTrace();

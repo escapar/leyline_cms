@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface CategoryRepo extends LeylineRepo<Category> {
     public Category findByAliasIgnoreCase(String name);
     public List<Category> findByReferenceIsNotNull();
+    public List<Category> findByReferenceIsNull();
 
 }

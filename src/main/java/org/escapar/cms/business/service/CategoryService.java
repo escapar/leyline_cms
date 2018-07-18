@@ -10,10 +10,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class CategoryService extends LeylineDomainService<CategoryRepo,Category> {
     public Category findOneByAlias(String name){
-        return repo.findByAliasIgnoreCase(name);
+        return getRepo().findByAliasIgnoreCase(name);
     }
     public List<Category> findStaticCategories(){
-        return repo.findByReferenceIsNotNull();
+        return getRepo().findByReferenceIsNotNull();
+    }
+    public List<Category> findNonStaticCategories(){
+        return getRepo().findByReferenceIsNull();
     }
 
 }

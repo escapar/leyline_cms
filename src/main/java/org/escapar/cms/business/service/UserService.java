@@ -30,40 +30,15 @@ public class UserService extends LeylineUserDetailsService<UserRepo,User> {
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public User checkAndGet(String username, String password) {
-        return repo.checkAndGet(username, password);
+        return getRepo().checkAndGet(username, password);
     }
-    //
-    //    public User reg(User reg) throws PersistenceException {
-    //
-    //        User user = save(
-    //                reg
-    //                        .setUnHashedPassword(reg.getPassword())
-    //                        .setRole(ROLE_CONSTS.ROLE_UNCHECKED_USER));
-    //
-    //        websiteService.save(
-    //                new Website()
-    //                        .setCreatedAt(new DateTime().getMillis())
-    //                        .setDomain(reg.getDomain())
-    //                        .setTitle(reg.getDomain())
-    //                        .setVerifyKey(RandomStringUtils.random(7))
-    //                        .setUser(user));
-    //
-    //        return user;
-    //    }
-    //
-    //    public User verify(User user) throws PersistenceException {
-    //        return save(user.setG(ROLE_CONSTS.ROLE_USER));
-    //    }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getRole(User user) {
         return User.getRole(user);
     }
 
-
-
     public User getByClaims(Claims c) throws Exception {
-        return c == null ? null : repo.findById(Long.valueOf((Integer)c.get("id"))).orElse(null);
+        return c == null ? null : getRepo().findById(Long.valueOf((Integer)c.get("id"))).orElse(null);
     }
 }

@@ -1,20 +1,70 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" view="home" layout:decorator="site/layouts/default">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{site/layouts/default.html}">
 <head>
     <title>首页</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" th:href="@{/assets/css/sakura.min.css}" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- SUPPORT SUKURA CSS , IT'S A FANCY PROJECT. https://github.com/oxalorg/sakura -->
 </head>
 <body layout:fragment="content">
-    <div id="column" th:each="c : ${ct}">
-        <h2>
-            <a th:text="${c.getKey().name}" th:href="${'/static/'+c.getKey().alias}">专栏标题</a>
-        </h2>
-        <li th:each="t : ${c.getValue()}">
-            <a th:text="${t.name}" th:href="${'/static/'+c.getKey().alias+'/'+t.id}">文章名</a>
-        </li>
+    <div class="siimple-jumbotron sd-header siimple-jumbotron--large">
+        <div class="siimple-jumbotron-title">Welcome to the escapar.org Alternative</div>
+        <div class="siimple-jumbotron-subtitle">This is a CMS Demo.</div>
+        <div class="siimple-jumbotron-detail">And all pages are back-end generated.</div>
     </div>
+    <div class="sd-group siimple-content--large" align="center">
+        <div class="sd-group-header">
+            <div class="sd-group-header-title" align="center">
+                <strong>Featured</strong> Pages
+            </div>
+        </div>
+
+
+
+        <a class="sd-group-item" align="center" href="category/whoami">
+            <div class="sd-group-item-logo" style="background-image:url('assets/images/groups/dependable.png');"></div>
+            <div class="sd-group-item-title">About</div>
+            <div class="sd-group-item-description">An introduction to the <strong>sole developer</strong> of this project.</div>
+        </a>
+
+
+
+        <a class="sd-group-item" align="center" href="category/amigos">
+            <div class="sd-group-item-logo" style="background-image:url('assets/images/groups/bracelet.png');"></div>
+            <div class="sd-group-item-title">Friends</div>
+            <div class="sd-group-item-description">Talented, brilliant, incredible, amazing, show stopping, spectacular guys online.</div>
+        </a>
+
+
+
+        <a class="sd-group-item" align="center" href="category/appendix">
+            <div class="sd-group-item-logo" style="background-image:url('assets/images/groups/origami.png');"></div>
+            <div class="sd-group-item-title">Appendix</div>
+            <div class="sd-group-item-description">An alias of Fan Disc.</div>
+        </a>
+
+
+
+
+    </div>
+    <div align="center" class="sd-examples siimple-content--large">
+        <div class="sd-examples-header">
+            <div class="sd-examples-header-title">Latest <strong>Topics</strong></div>
+            <div class="sd-examples-header-description">
+                Feel free to walk around.
+            </div>
+        </div>
+        <a class="sd-examples-item" align="center" th:href="${'/topic/'+t.name}" th:each="t : ${latest}">
+            <div class="sd-examples-item-image" th:style="${'background-image:url('+t.latestPublished.thumbnail+');'}"></div>
+            <div class="sd-examples-item-title" th:text="${t.latestPublished.title}">标题</div>
+            <div class="sd-examples-item-description" th:text="${t.latestPublished.summary}">简介</div>
+        </a>
+    </div>
+
 
 </body>
 </html>
