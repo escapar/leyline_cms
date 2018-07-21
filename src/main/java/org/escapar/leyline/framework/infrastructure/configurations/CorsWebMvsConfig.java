@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -33,4 +35,21 @@ public class CorsWebMvsConfig implements WebMvcConfigurer {
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
+
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer.favorPathExtension(true);
+    }
+
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+        // turn off all suffix pattern matching
+        configurer.setUseSuffixPatternMatch(true);
+        // OR
+        // turn on suffix pattern matching ONLY for suffixes
+        // you explicitly register using
+        // configureContentNegotiation(...)
+        configurer.setUseRegisteredSuffixPatternMatch(false);
+    }
+
 }

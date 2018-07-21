@@ -7,63 +7,118 @@
     <title>首页</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- SUPPORT SUKURA CSS , IT'S A FANCY PROJECT. https://github.com/oxalorg/sakura -->
 </head>
 <body layout:fragment="content">
-    <div class="siimple-jumbotron sd-header siimple-jumbotron--large">
-        <div class="siimple-jumbotron-title">Welcome to the escapar.org Alternative</div>
-        <div class="siimple-jumbotron-subtitle">This is a CMS Demo.</div>
-        <div class="siimple-jumbotron-detail">And all pages are back-end generated.</div>
-    </div>
-    <div class="sd-group siimple-content--large" align="center">
-        <div class="sd-group-header">
-            <div class="sd-group-header-title" align="center">
-                <strong>Featured</strong> Pages
+    <section class="hero is-link is-medium">
+        <div class="hero-body">
+            <div class="container">
+                    <div class="has-text-centered is-content">
+                        <h1 class="title">
+                            escapar.org
+                        </h1>
+                        <h2 class="subtitle">
+                            Trade this life for something new.
+                        </h2>
+                    </div>
+                    <div class="intro-column is-content">
+
+                    </div>
+                <div class="bd-focus">
+                    <nav class="columns">
+                        <a class="bd-focus-item column has-text-centered" href="category/whoami">
+                            <figure class="bd-focus-icon">
+                                <span class="bd-focus-cube-1 icon is-large">
+                                    <img src="assets/images/groups/dependable.png"/>
+                                </span>
+                            </figure>
+                            <p class="title is-4">
+                                <strong>About</strong>
+                            </p>
+                            <p class="subtitle is-6">An introduction to the sole developer of this project.</p>
+                        </a>
+
+
+                        <a class="bd-focus-item column has-text-centered" href="category/amigos">
+                            <figure class="bd-focus-icon">
+                                <span class="bd-focus-css3 icon is-large">
+                                    <img src="assets/images/groups/bracelet.png"/>
+                                </span>
+                            </figure>
+                            <p class="title is-4">
+                                <strong>Friends</strong>
+                            </p>
+                            <p class="subtitle is-6">
+                                Talented, brilliant, incredible, amazing, show stopping, spectacular guys online.
+                            </p>
+                        </a>
+
+                        <a class="bd-focus-item column has-text-centered" href="category/appendix">
+                            <figure class="bd-focus-icon">
+                                <span class="bd-focus-github icon is-large">
+                                    <img src="assets/images/groups/origami.png"/>
+                                </span>
+                            </figure>
+                            <p class="title is-4">
+                                <strong>Appendix</strong>
+                            </p>
+                            <p class="subtitle is-6">
+                                An alias of Fan Disc.
+                            </p>
+                        </a>
+
+                    </nav>
+                </div>
             </div>
         </div>
+    </section>
+
+    <section class="bd-book-banner section is-small">
+        <!-- <div class="bd-book-pattern"></div> -->
+        <header class="bd-index-header">
+            <h3 class="title is-3">
+                <div>
+                    <strong class="has-text-info">Featured</strong> Topics
+                </div>
+            </h3>
+            <h4 class="subtitle is-4">
+                Coolest things we've built so far
+            </h4>
+        </header>
+
+        <div class="hero-body">
+            <div class="container">
+                <div class="bd-book-columns columns">
+                    <a class="column bd-is-content" th:href="${'/topic/'+t.name}" th:each="t : ${latest}">
+                        <div class="bd-book-content">
+                            <div class="bd-book-content-inner" th:style="${'background-image:url('+t.latestPublished.thumbnail+');'}">
 
 
+                                <header class="block bd-book-header">
+                                    <h3 class="title title-featured" th:text="${t.latestPublished.title}">The official Bulma book! 😲</h3>
+                                    <p class="subtitle is-6 has-text-grey" th:text="${t.category.name}">by Jeremy Thomas, creator of Bulma, Oleksii Potiekhin,<br>Mikko Lauhakari, Aslam Shah and David Berning</p>
+                                </header>
 
-        <a class="sd-group-item" align="center" href="category/whoami">
-            <div class="sd-group-item-logo" style="background-image:url('assets/images/groups/dependable.png');"></div>
-            <div class="sd-group-item-title">About</div>
-            <div class="sd-group-item-description">An introduction to the <strong>sole developer</strong> of this project.</div>
-        </a>
+                                <div class="block bd-book-description is-size-5" th:text="${#strings.abbreviate(t.latestPublished.summary,200)}">
+                                    <p>A <strong>step-by-step guide</strong> that teaches you how to build a <strong>web interface from scratch</strong> using Bulma.</p>
+                                </div>
+                                <div class="bd-book-tags">
+                                    <div class="field">
+                                        <div class="control is-pulled-right">
+                                            <div class="tags has-addons">
+                                                <strong class="tag is-light" th:each="tag : ${t.tags}" th:text="${tag.name}">Epub</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                        </div>
 
-
-        <a class="sd-group-item" align="center" href="category/amigos">
-            <div class="sd-group-item-logo" style="background-image:url('assets/images/groups/bracelet.png');"></div>
-            <div class="sd-group-item-title">Friends</div>
-            <div class="sd-group-item-description">Talented, brilliant, incredible, amazing, show stopping, spectacular guys online.</div>
-        </a>
-
-
-
-        <a class="sd-group-item" align="center" href="category/appendix">
-            <div class="sd-group-item-logo" style="background-image:url('assets/images/groups/origami.png');"></div>
-            <div class="sd-group-item-title">Appendix</div>
-            <div class="sd-group-item-description">An alias of Fan Disc.</div>
-        </a>
-
-
-
-
-    </div>
-    <div align="center" class="sd-examples siimple-content--large">
-        <div class="sd-examples-header">
-            <div class="sd-examples-header-title">Latest <strong>Topics</strong></div>
-            <div class="sd-examples-header-description">
-                Feel free to walk around.
+                    </a>
+                </div>
             </div>
         </div>
-        <a class="sd-examples-item" align="center" th:href="${'/topic/'+t.name}" th:each="t : ${latest}">
-            <div class="sd-examples-item-image" th:style="${'background-image:url('+t.latestPublished.thumbnail+');'}"></div>
-            <div class="sd-examples-item-title" th:text="${t.latestPublished.title}">标题</div>
-            <div class="sd-examples-item-description" th:text="${t.latestPublished.summary}">简介</div>
-        </a>
-    </div>
+    </section>
 
 
 </body>

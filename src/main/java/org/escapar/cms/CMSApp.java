@@ -6,9 +6,11 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.thymeleaf.dialect.springdata.SpringDataDialect;
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
@@ -28,5 +30,11 @@ public class CMSApp extends LeylineApp {
     public LayoutDialect layoutDialect() {
         return new LayoutDialect();
     }
+    @Bean
+    public SpringDataDialect springDataDialect() {
+        return new SpringDataDialect();
+    }
+
+
 }
 

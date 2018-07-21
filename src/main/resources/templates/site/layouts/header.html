@@ -4,35 +4,84 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <html>
-        <div layout:fragment="nav" class="siimple-navbar siimple-navbar--primary sd-navbar siimple-navbar--extra-large" align="center">
-            <div class="siimple--float-left">
-                <a class="siimple-navbar-title" href="/">escapar</a>
-                <!--<a class="siimple-navbar-subtitle">org</a>-->
-                <a th:each="c : ${menuCategories}" class="siimple-navbar-item" th:text="${c.name}" th:href="${'/category/'+c.alias}">静态页专栏名</a>
+    <div layout:fragment="nav"  class="navbar is-info is-spaced">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item escapar-logo" href="/">
 
-            </div>
-            <!--<a th:each="c : ${menuCategories}" class="siimple-navbar-title" th:text="${c.name}" th:href="${'/web/'+c.alias}">静态页专栏名</a>-->
-            <div class="siimple--float-right">
-                <div class="siimple-grid-row">
+                    <img src="/assets/images/sitelogo.png" alt="escapar.org">
 
-                    <div class="siimple--display-xs-none siimple--d-sm-none">
-                        <a class="sd-navbar-social" style="background-image:url('/assets/images/social/twitter.png');" href="https://twitter.com/escapar2000" target="_blank"></a>
-                        <a class="sd-navbar-social" style="background-image:url('/assets/images/social/github.png');" href="https://github.com/POJOa/leyline_cms" target="_blank"></a>
-                        <a class="sd-navbar-social" style="background-image:url('/assets/images/social/weibo.png');" href="https://weibo.com/678687590" target="_blank"></a>
-                        <div class="popover__wrapper">
-                            <a class="sd-navbar-social" style="background-image:url('/assets/images/social/wechat.png');" href="https://github.com/POJOa/leyline_cms" target="_blank"></a>
-                            <div class="push popover__content" style="background-image:url('/assets/images/social/qrcode.png');width:129px;height:129px"></div>
-                        </div>
+                </a>
+
+                <a class="navbar-item is-hidden-desktop" href="https://weibo.com/rageandlove" target="_blank">
+                    <span class="icon" style="color: #ffffff;">
+                        <i class="icon-weibo"></i>
+                    </span>
+                </a>
+                <a class="navbar-item is-hidden-desktop" href="https://twitter.com/escapar2000" target="_blank">
+                    <span class="icon" style="color: #ffffff;">
+                        <i class="icon-twitter"></i>
+                    </span>
+                </a>
+                <a class="popover__wrapper navbar-item is-hidden-desktop" href="#">
+                    <span class="icon" style="color: #ffffff;">
+                        <i class="icon-wechat"></i>
+                    </span>
+                    <div class="push popover__content has-text-centered">
+                        <img src="/assets/images/social/qrcode.png"/>
+                        <small>公众号</small>
                     </div>
-
-                    <div class="siimple--display-xs-block siimple--display-md-none siimple--display-xl-none siimple--display-titan-none siimple--display-lg-none">
-                        <div class="popover__wrapper">
-                            <a class="sd-navbar-social" style="background-image:url('/assets/images/social/wechat.png');padding-left:0px;margin-left:0px;"></a>
-                            <div class="push popover__content" style="background-image:url('/assets/images/social/qrcode.png');width:129px;height:129px"></div>
-                        </div>
-                    </div>
-
+                </a>
+                <div class="navbar-burger burger" data-target="navMenuColorinfo-example">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
+
+            <div id="navMenuColorinfo-example" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="/">
+                        Home
+                    </a>
+                    <a th:each="c : ${menuCategories}" class="navbar-item" th:text="${c.name}" th:href="${'/category/'+c.alias}">
+                        NavItem Name
+                    </a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link"  >
+                            Links
+                        </a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href="https://escapar.org">
+                                escapar.org
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navbar-end">
+                            <a class="navbar-item " href="https://weibo.com/rageandlove" target="_blank">
+                                <span class="icon" style="color: #ffffff;">
+                                    <i class="icon-weibo"></i>
+                                </span>
+                            </a>
+                            <a class="navbar-item " href="https://twitter.com/escapar2000" target="_blank">
+                                <span class="icon" style="color: #ffffff;">
+                                    <i class="icon-twitter"></i>
+                                </span>
+                            </a>
+                                <a class="popover__wrapper navbar-item" href="#">
+                                    <span class="icon" style="color: #ffffff;">
+                                        <i class="icon-wechat"></i>
+                                    </span>
+                                    <div class="push popover__content has-text-centered">
+                                        <img src="/assets/images/social/qrcode.png"/>
+                                        <small>公众号</small>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+            </div>
         </div>
+    </nav>
 </html>

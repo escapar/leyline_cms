@@ -8,29 +8,59 @@
 
 </head>
 <body layout:fragment="content">
-    <div class="siimple-jumbotron sd-header siimple-jumbotron--large">
-        <div class="siimple-jumbotron-title" th:text="${c.name}">Welcome to the mirror of escapar.org</div>
-        <!--<div class="siimple-jumbotron-subtitle">This is a CMS Demo.</div>-->
-        <!--<div class="siimple-jumbotron-detail">And all pages are back-end generated.</div>-->
-    </div>
-    <div class="sd-main siimple-content--large">
-        <div class="siimple-grid">
-            <div class="siimple-grid-row">
-                <a th:each="t : ${topics}" th:href="${'/topic/'+t.name}" style="height:340px;text-decoration: unset;" class="siimple-card siimple-grid-col siimple-grid-col--4 siimple-grid-col--sm-12 siimple-grid-col--lg-6" >
+    <section class="hero is-link is-small">
+        <div class="hero-body">
+            <div class="container">
+                <div class="is-content">
+                    <h1 class="title" th:text="${c.name}">
+                        escapar.org
+                    </h1>
+                    <h2 class="subtitle">
+                        <!--Trade this life for something new.-->
+                    </h2>
+                </div>
+                <div class="intro-column is-content">
 
-                    <div class="siimple-card-body siimple--height-100" >
-                        <div th:text="${t.latestPublished.title}" class="siimple-card-title">
-                            Card header
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="category-container">
+        <div class="bd-main-container container ">
+            <div class="columns is-multiline is-8">
+                <a th:each="t : ${topics}" th:href="${'/topic/'+t.name}" style="text-decoration: unset;" class="column is-one-third-desktop is-full-mobile is-half-tablet is-full-touch is-flex " >
+
+
+                    <div class="card has-border-radius">
+                        <div class="card-image">
+                            <figure class="image is-2by1">
+                                <img class="has-border-radius has-padding-3" th:src="${t.latestPublished.thumbnail}" />
+                            </figure>
                         </div>
-                        <div class="siimple-card-subtitle" th:text="${#strings.arrayJoin(t.tags,', ')}">Special card subtitle</div>
-                        <div class="sd-examples-card-image" th:style="${'background-image:url('+t.latestPublished.thumbnail+');'}"></div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p th:text="${t.latestPublished.title}" class="title is-4">John Smith</p>
+                                    <p th:text="${#strings.arrayJoin(t.tags,', ') + ' | ' + #dates.format(t.createdAt.toInstant(), 'yy-MM-dd')}" class="list-page subtitle is-6">@johnsmith</p>
+                                </div>
+                            </div>
 
-                        <span th:text="${#strings.abbreviate(t.latestPublished.summary,70)}" ></span>
+                            <div class="content">
+                                <span th:text="${#strings.abbreviate(t.latestPublished.summary,150)}">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Phasellus nec iaculis mauris.
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
                 </a>
 
             </div>
+            <hr>
+            <div th:if="${page.getTotalPages() > 1}"sd:pagination="full-static"></div>
         </div>
     </div>
 

@@ -25,5 +25,7 @@ public class TagDTO implements LeylineDTO {
     @JsonView(CMSView.DETAIL.class)
     private ZonedDateTime createdAt;
 
-
+    @Override public String toString() {
+        return name;
+    }
 }

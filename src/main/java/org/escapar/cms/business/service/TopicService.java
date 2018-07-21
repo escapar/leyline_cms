@@ -40,6 +40,12 @@ public class TopicService extends LeylineDomainService<TopicRepo,Topic> {
     public List<Topic> findLatest3Featured(){
         return getRepo().findTop3ByFeaturedIsTrueAndLatestPublishedIsNotNullOrderByCreatedAtDesc();
     }
+    public Topic findPrev(Topic t){
+        return getRepo().findTop1ByCreatedAtBeforeAndLatestPublishedIsNotNull(t.getCreatedAt());
+    }
+    public Topic findNext(Topic t){
+        return getRepo().findTop1ByCreatedAtAfterAndLatestPublishedIsNotNull(t.getCreatedAt());
+    }
 
     public List<Topic> findByNameLike(String name){
         return getRepo().findByNameLike(name);

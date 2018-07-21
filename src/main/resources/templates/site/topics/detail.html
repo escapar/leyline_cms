@@ -12,30 +12,75 @@
     <script th:src="@{/assets/js/markdown-attr.min.js}"></script>
 
 </head>
-<body sd-main siimple-content--large layout:fragment="content">
-    <div class="siimple-jumbotron sd-header siimple-jumbotron--large">
-        <div class="siimple-jumbotron-title"  th:text="${t.latestPublished.title}">Welcome to the mirror of escapar.org</div>
-        <div class="siimple-jumbotron-subtitle" th:if="${t.latestPublished.publishedAt!=null && t.latestPublished.mainVersion!=null}" th:text="${'第'+t.latestPublished.mainVersion+'版 '+#dates.format(t.latestPublished.publishedAt.toInstant(), 'yyyy-MM-dd HH:mm')}">This is a CMS Demo.</div>
-        <div class="siimple-jumbotron-detail" th:text="${#strings.arrayJoin(t.tags,', ')}">And all pages are back-end generated.</div>
+<body layout:fragment="content">
+<section class="hero is-link is-medium">
+    <div class="hero-body detail-hero" th:style="${'background-image:url('+t.latestPublished.thumbnail+');'}">
+        <div class="container">
+            <div class="is-content">
+                <h1 class="title is-1" th:text="${t.latestPublished.title}">
+                    escapar.org
+                </h1>
+                <h2 class="subtitle is-4" th:if="${t.latestPublished.publishedAt!=null && t.latestPublished.mainVersion!=null}" th:text="${'第'+t.latestPublished.mainVersion+'版发布于 '+#dates.format(t.latestPublished.publishedAt.toInstant(), 'yyyy-MM-dd HH:mm')}">
+                    Trade this life for something new.
+                </h2>
+                <h3 class="subtitle is-5" th:text="${#strings.arrayJoin(t.tags,', ')}">
+                    Trade this life for something new.
+                </h3>
+            </div>
+            <div class="intro-column is-content">
+
+            </div>
+
+        </div>
     </div>
-    <div class="sd-main siimple-content--large">
-        <div  id="content" th:text="${t.latestPublished.content}"></div>
-        <!--<div class="siimple-grid-row">-->
-        <!--<div class="siimple-grid-col siimple-grid-col&#45;&#45;3 siimple-grid-col-sm&#45;&#45;12 sd-column">-->
-            <!--<div class="sd-menu">-->
-                <!--<div class="siimple-menu-group sd-menu-title">TOC</div>-->
+</section>
+<div class="bd-main-container container ">
+
+<div class="bd-lead">
+<div class="bd-breadcrumb">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a th:href="${'/category/'+t.category.alias}" th:text="${t.category.name}">Documentation</a>
+            </li>
+        </ul>
+    </nav>
 
 
-                <!--<a class="siimple-menu-item sd-menu-item sd-menu&#45;&#45;selected" href="../getting-started/installation.html">-->
-                    <!--Installation-->
-                <!--</a>-->
+    <nav class="bd-prev-next">
+        <a th:if="${prev!=null}" th:href="${'/topic/'+prev.name}" th:attr="title=${prev.latestPublished.title}">
+            ←
+        </a>
+        <a th:if="${next!=null}" th:href="${'/topic/'+next.name}" th:attr="title=${next.latestPublished.title}">
+            →
+        </a>
+    </nav>
 
-            <!--</div>-->
-        <!--</div>-->
+</div>
 
-        <!--<div  class="siimple-grid-col siimple-grid-col&#45;&#45;9 siimple-grid-col-sm&#45;&#45;12 sd-column" id="content"></div>-->
-    <!--</div>-->
+
+        <div class="container">
+            <div id="content" class="content is-medium" style="display: none" th:text="${t.latestPublished.content}"></div>
+            <nav class="bd-prev-next-bis">
+
+                <a th:text="${'← '+prev.latestPublished.title}" th:if="${prev!=null}" th:href="${'/topic/'+prev.name}" th:attr="title=${prev.latestPublished.title}" class="bd-prev-next-bis-previous">
+                    ← Delete
+                </a>
+
+
+
+                <a th:text="${next.latestPublished.title+ ' →'}" th:if="${next!=null}" th:href="${'/topic/'+next.name}" th:attr="title=${next.latestPublished.title}" class="bd-prev-next-bis-next">
+                    Image →
+                </a>
+
+            </nav>
+
+        </div>
     </div>
-    <script>document.getElementById('content').innerHTML = markdown_attr.parse(marked(document.getElementById('content').textContent));</script>
+</div>
+    <script>document.getElementById('content').style="display:unset";document.getElementById('content').innerHTML = markdown_attr.parse(marked(document.getElementById('content').textContent));</script>
 </body>
 </html>
