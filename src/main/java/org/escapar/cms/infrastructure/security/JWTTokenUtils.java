@@ -37,6 +37,9 @@ public class JWTTokenUtils {
     }
 
     public Claims parse( String token) {
+        if(token == null){
+            return null;
+        }
         return Jwts.parser().setSigningKey(signingKey)
                 .parseClaimsJws(token).getBody();
     }

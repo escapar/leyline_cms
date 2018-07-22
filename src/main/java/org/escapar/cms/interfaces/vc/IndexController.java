@@ -1,10 +1,14 @@
 package org.escapar.cms.interfaces.vc;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletResponse;
 
 import com.querydsl.core.types.Predicate;
 
@@ -19,6 +23,7 @@ import org.escapar.cms.interfaces.rest.TopicAPI;
 import org.escapar.leyline.framework.infrastructure.common.exceptions.PersistenceException;
 import org.escapar.leyline.framework.interfaces.dto.PageJSON;
 import org.escapar.leyline.framework.interfaces.dto.assembler.DTOAssembler;
+import org.h2.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.data.domain.Page;
@@ -89,5 +94,25 @@ public class IndexController {
         return opt.orElse("");
     }
 
+
+    @RequestMapping(value = {"/robots", "/robot", "/robot.txt", "/robots.txt", "/null"})
+    public void robot(HttpServletResponse response) throws IOException {
+
+        InputStream resourceAsStream = null;
+        try {
+
+            ClassLoader classLoader = getClass().getClassLoader();
+            resourceAsStream = classLoader.getResourceAsStream("robot.txt");
+
+            response.addHeader("Content-disposition", "filename=robot.txt");
+            response.setContentType("text/plain");
+            IOUtils.copy(resourceAsStream, response.getOutputStream());
+            response.flushBuffer();
+        } catch (Exception e) {
+
+        } finally {
+            resourceAsStream.close();
+        }
+    }
 
 }
