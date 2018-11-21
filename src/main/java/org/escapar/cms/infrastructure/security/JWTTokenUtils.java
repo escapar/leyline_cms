@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.Setter;
@@ -33,7 +34,11 @@ public class JWTTokenUtils {
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return null;
         }
-        return parse(authHeader.substring(7));
+        try {
+            return parse(authHeader.substring(7));
+        }catch (ExpiredJwtException e){
+            return null;
+        }
     }
 
     public Claims parse( String token) {

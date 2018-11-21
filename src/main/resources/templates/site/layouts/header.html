@@ -4,7 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <html>
-    <div layout:fragment="nav"  class="navbar is-info is-spaced">
+    <nav layout:fragment="nav"  class="navbar is-info is-spaced">
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item escapar-logo" href="/">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
 
-                <div class="navbar-end">
+                <div class="navbar-end is-hidden-mobile is-hidden-touch">
                             <a class="navbar-item " href="https://weibo.com/rageandlove" target="_blank">
                                 <span class="icon" style="color: #ffffff;">
                                     <i class="icon-weibo"></i>
@@ -82,6 +82,6 @@
                             </div>
                         </div>
             </div>
-        </div>
+        </nav>
     </nav>
 </html>

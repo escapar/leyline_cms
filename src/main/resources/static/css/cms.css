@@ -52,11 +52,11 @@ html, body, button, input, select, textarea{font-family:Montserrat,BlinkMacSyste
 
 @font-face {
     font-family: 'icomoon';
-    src:  url('../fonts/icomoon.eot?4ulyyc');
-    src:  url('../fonts/icomoon.eot?4ulyyc#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?4ulyyc') format('truetype'),
-    url('../fonts/icomoon.woff?4ulyyc') format('woff'),
-    url('../fonts/icomoon.svg?4ulyyc#icomoon') format('svg');
+    src:  url('../fonts/icomoon.eot');
+    src:  url('../fonts/icomoon.eot#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf') format('truetype'),
+    url('../fonts/icomoon.woff') format('woff'),
+    url('../fonts/icomoon.svg#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -212,3 +212,10 @@ html, body, button, input, select, textarea{font-family:Montserrat,BlinkMacSyste
 .has-padding-3{
     padding: 3px;
 }
+
+.navbar-burger{
+    color:white;
+    height: unset;
+
+}
+

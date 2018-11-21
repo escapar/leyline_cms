@@ -47,7 +47,7 @@ public class UploadAPI {
     public List<UploadFileDTO> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         return Arrays.asList(files)
                 .stream()
-                .map(file -> uploadFile(file))
+                .map(this::uploadFile)
                 .collect(Collectors.toList());
     }
 

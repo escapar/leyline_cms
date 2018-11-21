@@ -43,12 +43,7 @@ public class CorsWebMvsConfig implements WebMvcConfigurer {
 
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
-        // turn off all suffix pattern matching
         configurer.setUseSuffixPatternMatch(true);
-        // OR
-        // turn on suffix pattern matching ONLY for suffixes
-        // you explicitly register using
-        // configureContentNegotiation(...)
         configurer.setUseRegisteredSuffixPatternMatch(false);
     }
 
