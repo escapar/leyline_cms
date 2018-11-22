@@ -22,7 +22,7 @@ public class CorsWebMvsConfig implements WebMvcConfigurer {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Arrays.asList("http://localhost:9999","http://localhost:9527","http://localhost:3000","http://escapar.org","https://escapar.org"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:9999","http://localhost:9527","http://localhost:3000","http://escapar.org","https://escapar.org","http://m.escapar.org","https://m.escapar.org"));
         config.addAllowedHeader("*");
         config.addAllowedHeader("X-Authorization");
         config.addAllowedMethod("OPTIONS");
